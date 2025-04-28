@@ -1,0 +1,129 @@
+* {
+    color: var(--black);
+    margin: 0;
+    padding: 0;
+} 
+
+@font-face {
+    font-family: 'lovelace';
+    src: 
+         url('public/fonts/Lovelace-Medium.ttf') format('truetype');
+         
+    font-weight: normal;
+    font-style: normal; 
+}
+
+@font-face {
+    font-family: 'coralpixel';
+    src: 
+         url('public/fonts/coralpixel.ttf') format('truetype');
+         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mono-med';
+    src: 
+         url('public/fonts/DMMono-Medium.ttf') format('truetype');
+         
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mono-light-ita';
+    src: 
+         url('public/fonts/DMMono-LightItalic.ttf') format('truetype');
+        
+    font-style: italic;
+}
+  
+@font-face {
+    font-family: 'Mono-light';
+    src: 
+         url('public/fonts/DMMono-Light.ttf') format('truetype');
+        
+    font-style: normal;
+}
+  
+:root {
+    --black:#161616;
+    --blue:#2600FF;
+    --red:##FF0000;
+  } 
+
+
+
+ h1 {
+    font-family: 'lovelace', sans-serif;
+    text-align: center;
+    font-size: 8.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 6.625rem; /* 75% */
+    letter-spacing: 0.0375rem;
+  }
+
+
+ h2 {
+    font-family: 'Mono', sans-serif;
+    font-weight: 700; 
+    font-size: 5.5rem;
+  }
+
+
+  h3 {
+    font-family: 'Mono', sans-serif;
+    font-weight: 700; 
+    font-size: 4.5rem; 
+  }
+
+
+ h4 {
+    font-family: 'Mono-med', sans-serif;
+    font-weight: 400; 
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 0.8125rem; /* 108.333% */
+    letter-spacing: 0.00375rem;
+  }
+
+  h5 {
+    font-family: 'Mono-med', sans-serif;
+    font-weight: 700; 
+    font-size: 1rem; 
+  }
+
+
+  
+  p {
+    font-family: 'Mono-med', sans-serif;
+    font-weight: 300; 
+    line-height: 1rem; 
+    letter-spacing: 0.0175rem;
+    font-size: 0.875rem;
+  }
+
+  a {
+    font-family: 'Mono-light-ita';
+    font-size: 2rem; 
+    line-height: 0.8125rem; /* 65% */
+    letter-spacing: 0.00625rem;
+    color: white;
+    text-decoration: none;
+   
+  }
+
+  b {
+    font-family: "Coral Pixels";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1rem; 
+    letter-spacing: 0.05rem;
+    
+  }
+ 
+ 
+
