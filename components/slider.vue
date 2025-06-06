@@ -2,6 +2,9 @@
     <main >
         <li>
             <ul>
+                <a href="/">Home</a> 
+            </ul>  
+            <ul>
                 <a href="about">À propos</a> 
             </ul>  
             <ul>
@@ -14,7 +17,7 @@
     </main>
 </template>
 
-<style>
+<style scoped>
 main {
     width: 100%;
 }
