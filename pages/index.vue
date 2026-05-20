@@ -44,7 +44,7 @@
 <style scoped>
 .navigation {
   position: absolute;
-  z-index: 5;
+  z-index: 25;
   width: 25%;
   height: 100vh;
   background-color: var(--blue);
