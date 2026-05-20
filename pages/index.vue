@@ -106,6 +106,12 @@ button img {
   grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
+  pointer-events: none;
+}
+
+.grid-container button,
+.grid-container section {
+  pointer-events: auto;
 }
 
 @media (max-width: 1024px) {
@@ -259,14 +265,13 @@ iframe {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1;
+  z-index: 2;
   pointer-events: auto;
 }
 
 main {
   position: relative;
-  pointer-events: auto;
-  z-index: 10;
+  z-index: 20;
 }
 
 
