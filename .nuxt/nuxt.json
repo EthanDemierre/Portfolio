@@ -1,7 +1,7 @@
 {
-  "_hash": "DjlOZmx09rXHaNWlcCPq0Ytg4JEDsdF0-AhjcXgC8QQ",
+  "_hash": "_WRN6KYM5Jt7Jmf8E5zIMskQfibehJj9rGVgGctYvVU",
   "project": {
-    "rootDir": "/Users/ethan/Sites/sites/Portfolio-2025"
+    "rootDir": "/root/app/code"
   },
   "versions": {
     "nuxt": "3.16.2"
