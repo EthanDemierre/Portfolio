@@ -65,24 +65,31 @@
     letter-spacing: 0.0375rem;
   }
 
+  @media (max-width: 1440px) {
+    h1 {
+      font-size: 9rem;
+      line-height: 7rem;
+    }
+  }
+
   @media (max-width: 1024px) {
     h1 {
-      font-size: 5rem;
-      line-height: 4rem;
+      font-size: 7rem;
+      line-height: 5.5rem;
     }
   }
 
   @media (max-width: 768px) {
     h1 {
-      font-size: 3.5rem;
-      line-height: 2.8rem;
+      font-size: 4.5rem;
+      line-height: 3.5rem;
     }
   }
 
   @media (max-width: 480px) {
     h1 {
-      font-size: 2rem;
-      line-height: 1.6rem;
+      font-size: 2.5rem;
+      line-height: 2rem;
     }
   }
 
@@ -95,19 +102,19 @@
 
   @media (max-width: 1024px) {
     h2 {
-      font-size: 3.5rem;
+      font-size: 4.5rem;
     }
   }
 
   @media (max-width: 768px) {
     h2 {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
   }
 
   @media (max-width: 480px) {
     h2 {
-      font-size: 1.75rem;
+      font-size: 2rem;
     }
   }
 
@@ -120,19 +127,19 @@
 
   @media (max-width: 1024px) {
     h3 {
-      font-size: 3rem;
+      font-size: 3.5rem;
     }
   }
 
   @media (max-width: 768px) {
     h3 {
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
   }
 
   @media (max-width: 480px) {
     h3 {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
     }
   }
 
@@ -174,19 +181,19 @@
 
   @media (max-width: 1024px) {
     a {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
     }
   }
 
   @media (max-width: 768px) {
     a {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
     }
   }
 
   @media (max-width: 480px) {
     a {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
 

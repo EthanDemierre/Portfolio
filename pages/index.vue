@@ -51,6 +51,12 @@
   transition: transform 0.4s ease-in-out;
 }
 
+@media (max-width: 1440px) {
+  .navigation {
+    width: 30%;
+  }
+}
+
 @media (max-width: 1024px) {
   .navigation {
     width: 40%;
@@ -117,6 +123,13 @@ button img {
   pointer-events: auto;
 }
 
+@media (max-width: 1440px) {
+  .grid-container {
+    padding: 1.75rem;
+    border-width: 0.9rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid-container {
     padding: 1.5rem;
@@ -133,8 +146,8 @@ button img {
 
 @media (max-width: 480px) {
   .grid-container {
-    padding: 0.5rem;
-    border-width: 0.25rem;
+    padding: 0.75rem;
+    border-width: 0.35rem;
   }
 }
 
@@ -146,9 +159,16 @@ button img {
   justify-content: center;
 }
 
+@media (max-width: 1440px) {
+  .grid-item-main {
+    grid-column: 4 / span 5;
+    grid-row: 5 / span 3;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid-item-main {
-    grid-column: 3 / span 8;
+    grid-column: 3 / span 7;
     grid-row: 5 / span 3;
   }
 }
@@ -191,6 +211,14 @@ button img {
   z-index: 2;
 }
 
+@media (max-width: 1440px) {
+  .flower-icon {
+    width: 7.5rem;
+    height: 7.5rem;
+    left: 2.25rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .flower-icon {
     width: 6.5rem;
@@ -229,6 +257,13 @@ h1 {
   background-color: white;
 }
 
+@media (max-width: 1024px) {
+  .imd {
+    width: 35%;
+    padding: 1.1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .imd {
     width: 50%;
@@ -248,6 +283,13 @@ h1 {
   grid-row: 10 / span 2;
   align-self: end;
   justify-self: start;
+}
+
+@media (max-width: 1440px) {
+  .grid-item-quote {
+    grid-column: 9 / span 4;
+    grid-row: 10 / span 2;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -278,6 +320,13 @@ h1 {
   margin-bottom: 0.5rem;
   font-size: 0.8rem;
   text-align: left;
+}
+
+@media (max-width: 1024px) {
+  .quote p {
+    width: 85%;
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 768px) {
