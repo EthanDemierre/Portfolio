@@ -58,10 +58,10 @@
  h1 {
     font-family: 'lovelace', sans-serif;
     text-align: center;
-    font-size: 8.5rem;
+    font-size: 10rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 6.625rem; /* 75% */
+    line-height: 8rem; /* 75% */
     letter-spacing: 0.0375rem;
   }
 
