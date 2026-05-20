@@ -255,15 +255,18 @@ h1 {
 
 iframe {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  transform: translateX(-3);
-  
+  z-index: 1;
+  pointer-events: auto;
 }
 
 main {
   position: relative;
   pointer-events: auto;
+  z-index: 10;
 }
 
 
