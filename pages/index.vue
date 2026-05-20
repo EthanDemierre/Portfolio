@@ -13,8 +13,10 @@
   ></iframe>
 
   <main class="grid-container">
-    <button ref="menuBtn" @click="toggleNav">
-      <img src="public/img/menu.svg" alt="">
+    <button ref="menuBtn" @click="toggleNav" class="hamburger" :class="{ 'hamburger--active': showNav }">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
     </button>
 
     <section class="content grid-item-main">
@@ -79,31 +81,77 @@
   transform: translateX(0);
 }
 
-button {
+button.hamburger {
   background: none;
   border: none;
   cursor: pointer;
   position: absolute;
   z-index: 10;
-  padding: 0.25rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 1.8rem;
+  height: auto;
 }
 
-button img {
+.hamburger-line {
   width: 1.8rem;
-  height: 1.8rem;
+  height: 0.15rem;
+  background-color: var(--black);
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.hamburger--active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translateY(0.55rem);
+}
+
+.hamburger--active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger--active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translateY(-0.55rem);
 }
 
 @media (max-width: 768px) {
-  button img {
+  button.hamburger {
     width: 1.5rem;
-    height: 1.5rem;
+    gap: 0.35rem;
+  }
+
+  .hamburger-line {
+    width: 1.5rem;
+    height: 0.13rem;
+  }
+
+  .hamburger--active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translateY(0.45rem);
+  }
+
+  .hamburger--active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-0.45rem);
   }
 }
 
 @media (max-width: 480px) {
-  button img {
+  button.hamburger {
     width: 1.2rem;
-    height: 1.2rem;
+    gap: 0.3rem;
+  }
+
+  .hamburger-line {
+    width: 1.2rem;
+    height: 0.12rem;
+  }
+
+  .hamburger--active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translateY(0.36rem);
+  }
+
+  .hamburger--active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-0.36rem);
   }
 }
 
