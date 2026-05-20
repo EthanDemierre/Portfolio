@@ -85,25 +85,25 @@ button {
   cursor: pointer;
   position: absolute;
   z-index: 10;
-  padding: 0.5rem;
+  padding: 0.25rem;
 }
 
 button img {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
 @media (max-width: 768px) {
   button img {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   button img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 }
 
