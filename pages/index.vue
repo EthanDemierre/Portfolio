@@ -177,22 +177,25 @@ button img {
 }
 
 .name-with-flower {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 .flower-icon {
+  position: absolute;
   width: 6rem;
   height: 6rem;
-  flex-shrink: 0;
+  top: -1rem;
+  left: 2rem;
+  z-index: 2;
 }
 
 @media (max-width: 1024px) {
   .flower-icon {
     width: 5rem;
     height: 5rem;
+    left: 1.5rem;
   }
 }
 
@@ -200,10 +203,8 @@ button img {
   .flower-icon {
     width: 4rem;
     height: 4rem;
-  }
-
-  .name-with-flower {
-    gap: 1rem;
+    left: 1rem;
+    top: -0.75rem;
   }
 }
 
@@ -211,10 +212,8 @@ button img {
   .flower-icon {
     width: 3rem;
     height: 3rem;
-  }
-
-  .name-with-flower {
-    gap: 0.75rem;
+    left: 0.5rem;
+    top: -0.5rem;
   }
 }
 
