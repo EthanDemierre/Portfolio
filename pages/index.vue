@@ -48,6 +48,24 @@
   transition: transform 0.4s ease-in-out;
 }
 
+@media (max-width: 1024px) {
+  .navigation {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    width: 100%;
+  }
+}
+
 .navigation--active {
   transform: translateX(0);
 }
@@ -55,6 +73,29 @@
 button {
   background: none;
   border: none;
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+  padding: 0.5rem;
+}
+
+button img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  button img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  button img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .grid-container {
@@ -67,12 +108,55 @@ button {
   border: 1rem solid var(--blue);
 }
 
+@media (max-width: 1024px) {
+  .grid-container {
+    padding: 1.5rem;
+    border-width: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    padding: 1rem;
+    border-width: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    padding: 0.5rem;
+    border-width: 0.25rem;
+  }
+}
+
 .grid-item-main {
   grid-column: 4 / span 6;
   grid-row: 6 / span 3;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .grid-item-main {
+    grid-column: 3 / span 8;
+    grid-row: 5 / span 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-item-main {
+    grid-column: 2 / span 10;
+    grid-row: 4 / span 4;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-item-main {
+    grid-column: 1 / -1;
+    grid-row: 3 / span 4;
+    padding: 1rem;
+  }
 }
 
 .moi {
@@ -95,6 +179,20 @@ h1 {
   background-color: white;
 }
 
+@media (max-width: 768px) {
+  .imd {
+    width: 50%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .imd {
+    width: 100%;
+    padding: 0.75rem;
+  }
+}
+
 .grid-item-quote {
   grid-column: 10 / span 3;
   grid-row: 10 / span 2;
@@ -102,11 +200,49 @@ h1 {
   justify-self: start;
 }
 
+@media (max-width: 1024px) {
+  .grid-item-quote {
+    grid-column: 8 / span 5;
+    grid-row: 9 / span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-item-quote {
+    grid-column: 1 / span 12;
+    grid-row: 8 / span 2;
+    align-self: auto;
+    justify-self: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-item-quote {
+    grid-column: 1 / -1;
+    grid-row: 7 / span 3;
+  }
+}
+
 .quote p {
   width: 75%;
   margin-bottom: 0.5rem;
   font-size: 0.8rem;
   text-align: left;
+}
+
+@media (max-width: 768px) {
+  .quote p {
+    width: 100%;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quote p {
+    width: 100%;
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
+  }
 }
 
 .grid-item-nav {
