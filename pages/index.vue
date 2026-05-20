@@ -19,7 +19,10 @@
 
     <section class="content grid-item-main">
       <div class="moi">
-        <h1>Ethan Demierre</h1>
+        <div class="name-with-flower">
+          <img src="public/img/fleur.svg" alt="fleur" class="flower-icon">
+          <h1>Ethan Demierre</h1>
+        </div>
         <div class="imd">
           <h4>Interactive Media Designer.</h4>
         </div>
@@ -171,6 +174,48 @@ button img {
   gap: 0rem;
   align-items: center;
   text-align: center;
+}
+
+.name-with-flower {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.flower-icon {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .flower-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .flower-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .name-with-flower {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .flower-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .name-with-flower {
+    gap: 0.5rem;
+  }
 }
 
 h1 {
