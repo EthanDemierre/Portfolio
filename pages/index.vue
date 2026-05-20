@@ -222,23 +222,30 @@ h1 {
 }
 
 .imd {
-  display: inline-block;
+  display: inline-flex;
   padding: 1.3rem;
   border: 1px solid;
-  width: 33%;
+  min-width: 20%;
+  width: auto;
+  max-width: 90%;
   background-color: white;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
   .imd {
-    width: 50%;
+    min-width: 25%;
+    max-width: 85%;
     padding: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .imd {
-    width: 100%;
+    min-width: 30%;
+    max-width: 95%;
     padding: 0.75rem;
   }
 }
