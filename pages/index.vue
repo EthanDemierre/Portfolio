@@ -225,7 +225,7 @@ h1 {
   display: inline-block;
   padding: 1.3rem;
   border: 1px solid;
-  width: 25%;
+  width: 33%;
   background-color: white;
 }
 
