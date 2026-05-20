@@ -184,37 +184,37 @@ button img {
 }
 
 .flower-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 6rem;
+  height: 6rem;
   flex-shrink: 0;
 }
 
 @media (max-width: 1024px) {
   .flower-icon {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 5rem;
+    height: 5rem;
   }
 }
 
 @media (max-width: 768px) {
   .flower-icon {
-    width: 2rem;
-    height: 2rem;
+    width: 4rem;
+    height: 4rem;
   }
 
   .name-with-flower {
-    gap: 0.75rem;
+    gap: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .flower-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 3rem;
+    height: 3rem;
   }
 
   .name-with-flower {
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 }
 
