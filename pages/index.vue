@@ -85,8 +85,10 @@ button.hamburger {
   background: none;
   border: none;
   cursor: pointer;
-  position: absolute;
-  z-index: 10;
+  position: fixed;
+  top: 2.2rem;
+  left: 2.2rem;
+  z-index: 20;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -115,8 +117,39 @@ button.hamburger {
   transform: rotate(-45deg) translateY(-0.55rem);
 }
 
+@media (max-width: 1440px) {
+  button.hamburger {
+    top: 2rem;
+    left: 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  button.hamburger {
+    top: 1.75rem;
+    left: 1.75rem;
+    width: 1.6rem;
+    gap: 0.35rem;
+  }
+
+  .hamburger-line {
+    width: 1.6rem;
+    height: 0.13rem;
+  }
+
+  .hamburger--active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translateY(0.48rem);
+  }
+
+  .hamburger--active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-0.48rem);
+  }
+}
+
 @media (max-width: 768px) {
   button.hamburger {
+    top: 1.25rem;
+    left: 1.25rem;
     width: 1.5rem;
     gap: 0.35rem;
   }
@@ -137,6 +170,8 @@ button.hamburger {
 
 @media (max-width: 480px) {
   button.hamburger {
+    top: 0.75rem;
+    left: 0.75rem;
     width: 1.2rem;
     gap: 0.3rem;
   }
@@ -402,48 +437,12 @@ h1 {
 
 iframe {
   position: fixed;
-  top: 3rem;
-  left: 3rem;
-  width: calc(100vw - 6rem);
-  height: calc(100vh - 6rem);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 2;
   pointer-events: auto;
-}
-
-@media (max-width: 1440px) {
-  iframe {
-    top: 2.75rem;
-    left: 2.75rem;
-    width: calc(100vw - 5.5rem);
-    height: calc(100vh - 5.5rem);
-  }
-}
-
-@media (max-width: 1024px) {
-  iframe {
-    top: 2.25rem;
-    left: 2.25rem;
-    width: calc(100vw - 4.5rem);
-    height: calc(100vh - 4.5rem);
-  }
-}
-
-@media (max-width: 768px) {
-  iframe {
-    top: 1.5rem;
-    left: 1.5rem;
-    width: calc(100vw - 3rem);
-    height: calc(100vh - 3rem);
-  }
-}
-
-@media (max-width: 480px) {
-  iframe {
-    top: 0.75rem;
-    left: 0.75rem;
-    width: calc(100vw - 1.5rem);
-    height: calc(100vh - 1.5rem);
-  }
 }
 
 main {
