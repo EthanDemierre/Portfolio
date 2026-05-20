@@ -402,12 +402,48 @@ h1 {
 
 iframe {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 3rem;
+  left: 3rem;
+  width: calc(100vw - 6rem);
+  height: calc(100vh - 6rem);
   z-index: 2;
   pointer-events: auto;
+}
+
+@media (max-width: 1440px) {
+  iframe {
+    top: 2.75rem;
+    left: 2.75rem;
+    width: calc(100vw - 5.5rem);
+    height: calc(100vh - 5.5rem);
+  }
+}
+
+@media (max-width: 1024px) {
+  iframe {
+    top: 2.25rem;
+    left: 2.25rem;
+    width: calc(100vw - 4.5rem);
+    height: calc(100vh - 4.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  iframe {
+    top: 1.5rem;
+    left: 1.5rem;
+    width: calc(100vw - 3rem);
+    height: calc(100vh - 3rem);
+  }
+}
+
+@media (max-width: 480px) {
+  iframe {
+    top: 0.75rem;
+    left: 0.75rem;
+    width: calc(100vw - 1.5rem);
+    height: calc(100vh - 1.5rem);
+  }
 }
 
 main {
