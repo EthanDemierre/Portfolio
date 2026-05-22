@@ -10,11 +10,14 @@
       <img src="public/img/menu.svg" alt="">
     </button>
 
-    <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
-      <div class="projects-list" :style="{ transform: getLoopedTransform() }">
-        <div v-for="project in projects" :key="project.id" class="project-item">
-          <img :src="project.image" :alt="project.title" class="project-image" />
-        </div>
+    <div class="projects-rain-container" @mouseenter="pauseRain" @mouseleave="resumeRain">
+      <div
+        v-for="(project, index) in animatedProjects"
+        :key="`${project.id}-${index}`"
+        class="project-rain-item"
+        :style="getProjectStyle(index)"
+      >
+        <img :src="project.image" :alt="project.title" class="project-image" />
       </div>
     </div>
   </main>
@@ -25,9 +28,7 @@ export default {
   data() {
     return {
       showNav: false,
-      scrollPosition: 0,
-      isScrolling: true,
-      scrollSpeed: 3,
+      isRaining: true,
       projects: [
         { id: 1, title: 'Projet 1', image: '/img/projet/projet1.png' },
         { id: 2, title: 'Projet 2', image: '/img/projet/projet1.png' },
@@ -35,7 +36,10 @@ export default {
         { id: 4, title: 'Projet 4', image: '/img/projet/projet1.png' },
         { id: 5, title: 'Projet 5', image: '/img/projet/projet1.png' },
         { id: 6, title: 'Projet 6', image: '/img/projet/projet1.png' }
-      ]
+      ],
+      animatedProjects: [],
+      projectPositions: [],
+      time: 0
     };
   },
   methods: {
@@ -55,28 +59,51 @@ export default {
         this.showNav = false;
       }
     },
-    pauseScroll() {
-      this.isScrolling = false;
+    pauseRain() {
+      this.isRaining = false;
     },
-    resumeScroll() {
-      this.isScrolling = true;
+    resumeRain() {
+      this.isRaining = true;
     },
-    animateScroll() {
-      if (this.isScrolling) {
-        this.scrollPosition -= this.scrollSpeed;
+    initializeRain() {
+      this.animatedProjects = this.projects.concat(this.projects).concat(this.projects);
+      this.projectPositions = this.animatedProjects.map(() => ({
+        x: Math.random() * 80 + 10,
+        startTime: Math.random() * 2000
+      }));
+    },
+    getProjectStyle(index) {
+      const duration = 8000;
+      const containerHeight = window.innerHeight || 1000;
+      
+      const position = this.projectPositions[index];
+      if (!position) return {};
+      
+      if (this.isRaining) {
+        this.time += 16;
       }
-      requestAnimationFrame(this.animateScroll);
+      
+      const elapsed = (this.time + position.startTime) % (duration + 1000);
+      const progress = elapsed / (duration + 1000);
+      const top = (progress * (containerHeight + 300)) - 300;
+      
+      return {
+        left: `${position.x}%`,
+        top: `${top}px`,
+        opacity: progress < 0.1 ? progress * 10 : progress > 0.95 ? (1 - progress) * 20 : 1
+      };
     },
-    getLoopedTransform() {
-      const itemHeight = 620;
-      const totalHeight = this.projects.length * itemHeight;
-      const position = ((this.scrollPosition % totalHeight) + totalHeight) % totalHeight;
-      return `translateY(${-position}px)`;
+    animate() {
+      if (this.isRaining) {
+        this.$forceUpdate();
+      }
+      requestAnimationFrame(this.animate);
     }
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
-    this.animateScroll();
+    this.initializeRain();
+    this.animate();
   },
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
@@ -174,66 +201,45 @@ button {
   }
 }
 
-.projects-scroll-container {
+.projects-rain-container {
   grid-column: 1 / -1;
   grid-row: 1 / -1;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   position: relative;
   z-index: 5;
+  overflow: hidden;
 }
 
-.projects-list {
+.project-rain-item {
+  position: absolute;
+  width: 150px;
+  height: 150px;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 1rem;
-  will-change: transform;
-}
-
-@media (max-width: 768px) {
-  .projects-list {
-    gap: 1.5rem;
-    padding: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .projects-list {
-    gap: 1rem;
-    padding: 0.5rem;
-  }
-}
-
-.project-item {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 600px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.project-item:hover {
-  transform: scale(1.02);
+  justify-content: center;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  will-change: transform, opacity;
 }
 
 @media (max-width: 1024px) {
-  .project-item {
-    min-height: 450px;
+  .project-rain-item {
+    width: 120px;
+    height: 120px;
   }
 }
 
 @media (max-width: 768px) {
-  .project-item {
-    min-height: 350px;
+  .project-rain-item {
+    width: 100px;
+    height: 100px;
   }
 }
 
 @media (max-width: 480px) {
-  .project-item {
-    min-height: 250px;
+  .project-rain-item {
+    width: 80px;
+    height: 80px;
   }
 }
 
