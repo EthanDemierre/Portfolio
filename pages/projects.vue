@@ -11,7 +11,7 @@
     </button>
 
     <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
-      <div class="projects-list" :style="{ transform: `translateY(${scrollPosition}px)` }">
+      <div class="projects-list" :style="{ transform: getLoopedTransform() }">
         <div v-for="project in projects" :key="project.id" class="project-item">
           <img :src="project.image" :alt="project.title" class="project-image" />
         </div>
@@ -27,9 +27,14 @@ export default {
       showNav: false,
       scrollPosition: 0,
       isScrolling: true,
-      scrollSpeed: 1,
+      scrollSpeed: 3,
       projects: [
-        { id: 1, title: 'Projet 1', image: '/img/projet/projet1.png' }
+        { id: 1, title: 'Projet 1', image: '/img/projet/projet1.png' },
+        { id: 2, title: 'Projet 2', image: '/img/projet/projet1.png' },
+        { id: 3, title: 'Projet 3', image: '/img/projet/projet1.png' },
+        { id: 4, title: 'Projet 4', image: '/img/projet/projet1.png' },
+        { id: 5, title: 'Projet 5', image: '/img/projet/projet1.png' },
+        { id: 6, title: 'Projet 6', image: '/img/projet/projet1.png' }
       ]
     };
   },
@@ -59,12 +64,14 @@ export default {
     animateScroll() {
       if (this.isScrolling) {
         this.scrollPosition -= this.scrollSpeed;
-        const totalHeight = this.projects.length * 600;
-        if (-this.scrollPosition > totalHeight) {
-          this.scrollPosition = 0;
-        }
       }
       requestAnimationFrame(this.animateScroll);
+    },
+    getLoopedTransform() {
+      const itemHeight = 620;
+      const totalHeight = this.projects.length * itemHeight;
+      const position = ((this.scrollPosition % totalHeight) + totalHeight) % totalHeight;
+      return `translateY(${-position}px)`;
     }
   },
   mounted() {
