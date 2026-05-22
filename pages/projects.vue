@@ -66,14 +66,14 @@ export default {
       this.isRaining = true;
     },
     initializeRain() {
-      this.animatedProjects = this.projects.concat(this.projects).concat(this.projects);
+      this.animatedProjects = this.projects.concat(this.projects);
       this.projectPositions = this.animatedProjects.map(() => ({
         x: Math.random() * 80 + 10,
-        startTime: Math.random() * 2000
+        startTime: Math.random() * 3000
       }));
     },
     getProjectStyle(index) {
-      const duration = 8000;
+      const duration = 15000;
       const containerHeight = window.innerHeight || 1000;
       
       const position = this.projectPositions[index];
