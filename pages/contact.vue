@@ -64,7 +64,7 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
-  emailjs.init('H5p5Kn9-2Jy4Lq9Zx0Mw')
+  emailjs.init('5II7cZTJAkDhnbIrR')
 })
 
 onBeforeUnmount(() => {
@@ -91,7 +91,7 @@ const sendMessage = () => {
     message: form.message
   }
 
-  emailjs.send('service_4m0z4jj', 'template_o1r5lkp', templateParams)
+  emailjs.send('service_i092x4v', 'template_ksv7zxk', templateParams)
     .then(() => {
       successMessage.value = 'Message envoyé avec succès !'
       errorMessage.value = ''
