@@ -1,54 +1,39 @@
 <template>
-  <page-nav />
+  <section
+    ref="nav"
+    :class="['navigation', { 'navigation--active': showNav }]"
+  >
+    <slider />
+  </section>
 
-  <main class="page-main">
-    <section class="contact-content">
-      <div class="contact-form-wrapper">
-        <h2>Envoie moi un message.</h2>
-        <form @submit.prevent="sendMessage" class="contact-form">
+  <main class="grid-container">
+    <button ref="menuBtn" @click="toggleNav">
+      <img src="/img/menu.svg" alt="menu" />
+    </button>
+
+    <section class="content grid-item-main">
+      <div class="contact-form">
+        <b>Envoie moi un message.</b>
+        <form @submit.prevent="sendMessage">
           <div class="form-row">
-            <input
-              v-model="form.firstName"
-              type="text"
-              placeholder="Ethan"
-              class="form-input"
-              required
-            />
-            <input
-              v-model="form.lastName"
-              type="text"
-              placeholder="Demierre"
-              class="form-input"
-              required
-            />
+            <input v-model="form.firstName" type="text" placeholder="Ethan" required />
+            <input v-model="form.lastName" type="text" placeholder="Demierre" required />
           </div>
           <div class="form-row">
-            <input
-              v-model="form.email"
-              type="email"
-              placeholder="ethandemierre@gmail.com"
-              class="form-input"
-              required
-            />
-            <input
-              v-model="form.phone"
-              type="tel"
-              placeholder="079/657/54/43"
-              class="form-input"
-            />
+            <input v-model="form.email" type="email" placeholder="ethandemierre@gmail.com" required />
+            <input v-model="form.phone" type="tel" placeholder="079/657/54/43" />
           </div>
-          <textarea
-            v-model="form.message"
-            placeholder="Je t'aime ethan"
-            class="form-textarea"
-            required
-          ></textarea>
-          <button type="submit" class="submit-btn">Envoyez</button>
+          <textarea v-model="form.message" placeholder="Je t'aime ethan" required></textarea>
+          <button type="submit">Envoyez</button>
         </form>
 
-        <p v-if="successMessage" class="success-msg">{{ successMessage }}</p>
-        <p v-if="errorMessage" class="error-msg">{{ errorMessage }}</p>
+        <p v-if="successMessage" class="success">{{ successMessage }}</p>
+        <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
       </div>
+    </section>
+
+    <section class="quote grid-item-quote">
+   
     </section>
   </main>
 </template>
@@ -58,6 +43,33 @@ import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import emailjs from 'emailjs-com'
 
 const showNav = ref(false)
+const nav = ref(null)
+const menuBtn = ref(null)
+
+const toggleNav = () => {
+  showNav.value = !showNav.value
+}
+
+const handleClickOutside = (event) => {
+  if (
+    showNav.value &&
+    nav.value &&
+    !nav.value.contains(event.target) &&
+    menuBtn.value &&
+    !menuBtn.value.contains(event.target)
+  ) {
+    showNav.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+  emailjs.init('H5p5Kn9-2Jy4Lq9Zx0Mw')
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 
 const form = reactive({
   firstName: '',
@@ -70,12 +82,16 @@ const form = reactive({
 const successMessage = ref('')
 const errorMessage = ref('')
 
-const SERVICE_ID = 'service_xxx'
-const TEMPLATE_ID = 'template_xxx'
-const PUBLIC_KEY = 'public_xxx'
-
 const sendMessage = () => {
-  emailjs.send(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY)
+  const templateParams = {
+    to_email: 'ethandemierre@gmail.com',
+    from_name: `${form.firstName} ${form.lastName}`,
+    from_email: form.email,
+    phone: form.phone,
+    message: form.message
+  }
+
+  emailjs.send('service_4m0z4jj', 'template_o1r5lkp', templateParams)
     .then(() => {
       successMessage.value = 'Message envoyé avec succès !'
       errorMessage.value = ''
@@ -84,6 +100,9 @@ const sendMessage = () => {
       form.email = ''
       form.phone = ''
       form.message = ''
+      setTimeout(() => {
+        successMessage.value = ''
+      }, 3000)
     })
     .catch(() => {
       successMessage.value = ''
@@ -93,9 +112,46 @@ const sendMessage = () => {
 </script>
 
 <style scoped>
-.page-main {
-  position: relative;
-  z-index: 20;
+.navigation {
+  position: absolute;
+  z-index: 25;
+  width: 25%;
+  height: 100vh;
+  background-color: var(--blue);
+  box-shadow: 0 0px 10px rgb(0, 0, 0);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in-out;
+}
+
+@media (max-width: 1440px) {
+  .navigation {
+    width: 30%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navigation {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    width: 100%;
+  }
+}
+
+.navigation--active {
+  transform: translateX(0);
+}
+
+.grid-container {
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
@@ -103,91 +159,78 @@ const sendMessage = () => {
   grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
-  pointer-events: none;
-}
-
-.page-main > * {
-  pointer-events: auto;
 }
 
 @media (max-width: 1440px) {
-  .page-main {
+  .grid-container {
     padding: 1.75rem;
     border-width: 0.9rem;
   }
 }
 
 @media (max-width: 1024px) {
-  .page-main {
+  .grid-container {
     padding: 1.5rem;
     border-width: 0.75rem;
   }
 }
 
 @media (max-width: 768px) {
-  .page-main {
+  .grid-container {
     padding: 1rem;
     border-width: 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .page-main {
+  .grid-container {
     padding: 0.75rem;
     border-width: 0.35rem;
   }
 }
 
-.contact-content {
-  grid-column: 3 / span 8;
-  grid-row: 3 / span 8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
 }
 
-@media (max-width: 1440px) {
-  .contact-content {
-    grid-column: 3 / span 8;
-    grid-row: 3 / span 8;
-  }
+.grid-item-main {
+  grid-column: 4 / span 6;
+  grid-row: 4 / span 6;
 }
 
 @media (max-width: 1024px) {
-  .contact-content {
+  .grid-item-main {
+    grid-column: 3 / span 7;
+    grid-row: 3 / span 7;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-item-main {
     grid-column: 2 / span 10;
     grid-row: 3 / span 8;
   }
 }
 
-@media (max-width: 768px) {
-  .contact-content {
-    grid-column: 1 / span 12;
-    grid-row: 2 / span 10;
-  }
-}
-
 @media (max-width: 480px) {
-  .contact-content {
+  .grid-item-main {
     grid-column: 1 / -1;
     grid-row: 2 / span 10;
     padding: 1rem;
   }
 }
 
-.contact-form-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  font-family: monospace;
 }
 
 .form-row {
@@ -197,6 +240,7 @@ const sendMessage = () => {
 
 @media (max-width: 768px) {
   .form-row {
+    flex-direction: column;
     gap: 0.75rem;
   }
 }
@@ -208,79 +252,144 @@ const sendMessage = () => {
   }
 }
 
-.form-input,
-.form-textarea {
+input,
+textarea {
+  width: 100%;
   padding: 1rem;
-  font-family: inherit;
-  border: 1px solid var(--black);
+  font-family: monospace;
+  border: 1px solid black;
   font-size: 1rem;
 }
 
-.form-input {
-  flex: 1;
-}
-
-.form-textarea {
-  width: 100%;
-  min-height: 150px;
-  resize: vertical;
-}
-
 @media (max-width: 768px) {
-  .form-input,
-  .form-textarea {
+  input,
+  textarea {
     padding: 0.75rem;
     font-size: 0.9rem;
   }
+}
 
-  .form-textarea {
+@media (max-width: 480px) {
+  input,
+  textarea {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+textarea {
+  min-height: 150px;
+}
+
+@media (max-width: 480px) {
+  textarea {
     min-height: 120px;
   }
 }
 
-@media (max-width: 480px) {
-  .form-input,
-  .form-textarea {
-    padding: 0.75rem;
-    font-size: 0.85rem;
-  }
-
-  .form-textarea {
-    min-height: 100px;
-  }
-}
-
-.submit-btn {
-  padding: 1rem 2rem;
-  background-color: var(--blue);
-  color: white;
-  border: none;
-  cursor: pointer;
+button[type="submit"] {
   font-weight: bold;
   font-style: italic;
+  background-color: var(--blue);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
   width: fit-content;
-  align-self: center;
+  cursor: pointer;
 }
 
 @media (max-width: 480px) {
-  .submit-btn {
+  button[type="submit"] {
     width: 100%;
     padding: 0.875rem 1.5rem;
   }
 }
 
-.success-msg {
+.success {
   color: green;
-  text-align: center;
 }
 
-.error-msg {
+.error {
   color: red;
-  text-align: center;
 }
 
-h2 {
-  width: 100%;
-  text-align: center;
+.grid-item-quote {
+  grid-column: 10 / span 3;
+  grid-row: 10 / span 2;
+  align-self: end;
+  justify-self: start;
+  font-family: monospace;
+}
+
+@media (max-width: 1024px) {
+  .grid-item-quote {
+    grid-column: 9 / span 4;
+    grid-row: 10 / span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-item-quote {
+    grid-column: 1 / span 12;
+    grid-row: 9 / span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-item-quote {
+    grid-column: 1 / -1;
+    grid-row: 12 / span 2;
+  }
+}
+
+.quote p {
+  width: 75%;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+@media (max-width: 1024px) {
+  .quote p {
+    width: 85%;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .quote p {
+    width: 100%;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quote p {
+    width: 100%;
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+b {
+  color: #000;
+  font-family: "Coral Pixels";
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0.1rem;
+}
+
+@media (max-width: 768px) {
+  b {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  b {
+    font-size: 1.5rem;
+  }
 }
 </style>

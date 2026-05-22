@@ -1,187 +1,239 @@
 <template>
-  <page-nav />
+  <section
+    ref="nav"
+    :class="['navigation', { 'navigation--active': showNav }]">
+    <slider />
+  </section>
 
-  <main class="page-main">
-    <section class="about-content">
-      <div class="about-container">
-        <h2>À propos</h2>
-        <div class="about-squares">
-          <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
-            <rect width="68" height="68" fill="#2600FF"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
-            <rect width="68" height="68" fill="#FF0000"/>
-          </svg>
-        </div>
+  <main class="grid-container">
+    <button ref="menuBtn" @click="toggleNav">
+      <img src="public/img/menu.svg" alt="menu">
+    </button>
 
-        <div class="about-text">
-          <p>
-            J'ai 21 ans et je viens de terminer mes études à l'ERACOM. Passionné par la création sous toutes ses formes,
-            j'aime imaginer, construire, transformer des idées en expériences visuelles et interactives. Le mixmedia est pour moi un super moyen d'expression.
-          </p>
-          <p>
-            Si je devais m'identifier à des couleurs je serais le rouge (<span class="red-text">FF0000</span>) et le bleu (<span class="blue-text">2600FF</span>)
-            car...
-          </p>
-        </div>
+    <div class="carre-wrapper">
+      <div class="carre">
+        <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
+          <rect width="68" height="68" fill="#2600FF"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
+          <rect width="68" height="68" fill="#FF0000"/>
+        </svg>
+      </div>
+    </div>
+
+    <section class="content">
+      <div class="aboutme">
+        <p>
+          J'ai 21 ans et je viens de terminer mes études à l'ERACOM. Passionné par la création sous toutes ses formes,
+          j'aime imaginer, construire, transformer des idées en expériences visuelles et interactives. Le mixmedia est pour moi un super moyen d'expression.
+        </p>
+        <p>
+          Si je devais m'identifier à des couleurs je serais le rouge (<span class="red-text">FF0000</span>) et le bleu (<span class="blue-text">2600FF</span>)
+          car...
+        </p>
       </div>
     </section>
   </main>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      showNav: false
+    };
+  },
+  methods: {
+    toggleNav() {
+      this.showNav = !this.showNav;
+    },
+    handleClickOutside(event) {
+      const nav = this.$refs.nav;
+      const menuBtn = this.$refs.menuBtn;
+      if (
+        this.showNav &&
+        nav &&
+        !nav.contains(event.target) &&
+        menuBtn &&
+        !menuBtn.contains(event.target)
+      ) {
+        this.showNav = false;
+      }
+    }
+  },
+  mounted() {
+    document.addEventListener('click', this.handleClickOutside);
+  },
+  beforeUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+};
+</script>
+
 <style scoped>
-.page-main {
-  position: relative;
-  z-index: 20;
+:root {
+  --blue: #2600FF;
+}
+
+.navigation {
+  position: absolute;
+  z-index: 25;
+  width: 25%;
+  height: 100vh;
+  background-color: var(--blue);
+  box-shadow: 0 0px 10px rgb(0, 0, 0);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in-out;
+}
+
+@media (max-width: 1440px) {
+  .navigation {
+    width: 30%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .navigation {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    width: 100%;
+  }
+}
+
+.navigation--active {
+  transform: translateX(0);
+}
+
+button {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.grid-container {
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
-  pointer-events: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
 }
 
-.page-main > * {
-  pointer-events: auto;
+.carre-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carre {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 600px;
 }
 
 @media (max-width: 1440px) {
-  .page-main {
-    padding: 1.75rem;
-    border-width: 0.9rem;
+  .carre {
+    gap: 500px;
   }
 }
 
 @media (max-width: 1024px) {
-  .page-main {
-    padding: 1.5rem;
-    border-width: 0.75rem;
+  .carre {
+    gap: 300px;
   }
 }
 
 @media (max-width: 768px) {
-  .page-main {
-    padding: 1rem;
-    border-width: 0.5rem;
+  .carre {
+    gap: 150px;
   }
 }
 
 @media (max-width: 480px) {
-  .page-main {
-    padding: 0.75rem;
-    border-width: 0.35rem;
+  .carre {
+    gap: 80px;
   }
 }
 
-.about-content {
-  grid-column: 2 / span 10;
-  grid-row: 3 / span 8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-}
-
-@media (max-width: 1440px) {
-  .about-content {
-    grid-column: 2 / span 10;
-    grid-row: 3 / span 8;
-  }
-}
-
-@media (max-width: 1024px) {
-  .about-content {
-    grid-column: 2 / span 10;
-    grid-row: 3 / span 8;
-  }
-}
-
-@media (max-width: 768px) {
-  .about-content {
-    grid-column: 1 / span 12;
-    grid-row: 2 / span 10;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-content {
-    grid-column: 1 / -1;
-    grid-row: 2 / span 10;
-    padding: 1rem;
-  }
-}
-
-.about-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  text-align: center;
-  width: 100%;
-}
-
-.about-squares {
-  display: flex;
-  gap: 3rem;
-  justify-content: center;
-  align-items: center;
-}
-
-@media (max-width: 768px) {
-  .about-squares {
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-squares {
-    gap: 1rem;
-  }
-}
-
-.about-squares svg {
+.carre svg {
   width: 68px;
   height: 68px;
 }
 
+@media (max-width: 1024px) {
+  .carre svg {
+    width: 55px;
+    height: 55px;
+  }
+}
+
 @media (max-width: 768px) {
-  .about-squares svg {
-    width: 50px;
-    height: 50px;
+  .carre svg {
+    width: 45px;
+    height: 45px;
   }
 }
 
 @media (max-width: 480px) {
-  .about-squares svg {
-    width: 40px;
-    height: 40px;
+  .carre svg {
+    width: 35px;
+    height: 35px;
   }
 }
 
-.about-text {
+.content {
+  margin-top: auto;
+  padding-bottom: 2rem;
+}
+
+.aboutme {
   max-width: 800px;
+  margin: 0 auto;
   text-align: left;
   font-family: monospace;
+  font-size: 14px;
   line-height: 1.6;
 }
 
-.about-text p {
+.aboutme p {
   margin-bottom: 1.5rem;
-  font-size: 0.875rem;
 }
 
 @media (max-width: 768px) {
-  .about-text p {
-    font-size: 0.8rem;
+  .aboutme {
+    max-width: 100%;
+    font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
-  .about-text p {
-    font-size: 0.75rem;
+  .aboutme {
+    max-width: 100%;
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .aboutme p {
     margin-bottom: 1rem;
   }
 }
@@ -192,9 +244,5 @@
 
 .blue-text {
   color: #2600FF;
-}
-
-h2 {
-  width: 100%;
 }
 </style>
