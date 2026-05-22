@@ -12,8 +12,17 @@
 
     <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
       <div class="projects-list" :style="{ transform: getLoopedTransform() }">
-        <div v-for="project in projects" :key="project.id" class="project-item">
-          <img :src="project.image" :alt="project.title" class="project-image" />
+        <div v-for="project in projects" :key="project.id" class="project-item" @mouseenter="hoveredProject = project.id" @mouseleave="hoveredProject = null">
+          <div class="project-image-wrapper">
+            <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredProject === project.id }" />
+            <div v-if="hoveredProject === project.id" class="project-info">
+              <div class="project-info-content">
+                <p class="project-date">{{ project.date }}</p>
+                <p class="project-description">{{ project.description }}</p>
+                <p class="project-medium">{{ project.medium }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -28,13 +37,56 @@ export default {
       scrollPosition: 0,
       isScrolling: true,
       scrollSpeed: 3,
+      hoveredProject: null,
       projects: [
-        { id: 1, title: 'Projet 1', image: '/img/projet/projet1.png' },
-        { id: 2, title: 'Projet 2', image: '/img/projet/projet1.png' },
-        { id: 3, title: 'Projet 3', image: '/img/projet/projet1.png' },
-        { id: 4, title: 'Projet 4', image: '/img/projet/projet1.png' },
-        { id: 5, title: 'Projet 5', image: '/img/projet/projet1.png' },
-        { id: 6, title: 'Projet 6', image: '/img/projet/projet1.png' }
+        {
+          id: 1,
+          title: 'Projet 1',
+          image: '/img/projet/projet1.png',
+          date: '2024',
+          description: 'Description courte du projet 1',
+          medium: 'Design / Web'
+        },
+        {
+          id: 2,
+          title: 'Projet 2',
+          image: '/img/projet/projet1.png',
+          date: '2024',
+          description: 'Description courte du projet 2',
+          medium: 'Animation / 3D'
+        },
+        {
+          id: 3,
+          title: 'Projet 3',
+          image: '/img/projet/projet1.png',
+          date: '2023',
+          description: 'Description courte du projet 3',
+          medium: 'Interactif / Code'
+        },
+        {
+          id: 4,
+          title: 'Projet 4',
+          image: '/img/projet/projet1.png',
+          date: '2023',
+          description: 'Description courte du projet 4',
+          medium: 'Motion / Video'
+        },
+        {
+          id: 5,
+          title: 'Projet 5',
+          image: '/img/projet/projet1.png',
+          date: '2023',
+          description: 'Description courte du projet 5',
+          medium: 'Illustration / Design'
+        },
+        {
+          id: 6,
+          title: 'Projet 6',
+          image: '/img/projet/projet1.png',
+          date: '2022',
+          description: 'Description courte du projet 6',
+          medium: 'Prototype / UX'
+        }
       ]
     };
   },
@@ -237,10 +289,115 @@ button {
   }
 }
 
+.project-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .project-image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   border: 1px solid var(--black);
+  transition: filter 0.3s ease;
+}
+
+.project-image.blurred {
+  filter: blur(8px);
+}
+
+.project-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.project-info-content {
+  text-align: center;
+  padding: 2rem;
+  width: 100%;
+}
+
+.project-date {
+  font-family: 'Mono-light', sans-serif;
+  font-size: 0.875rem;
+  color: var(--black);
+  margin-bottom: 1rem;
+  letter-spacing: 0.0175rem;
+}
+
+.project-description {
+  font-family: 'Mono-med', sans-serif;
+  font-size: 1rem;
+  color: var(--black);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.project-medium {
+  font-family: 'Mono-light-ita', sans-serif;
+  font-size: 0.875rem;
+  color: var(--black);
+  font-style: italic;
+  letter-spacing: 0.0175rem;
+}
+
+@media (max-width: 768px) {
+  .project-info-content {
+    padding: 1.5rem;
+  }
+
+  .project-date {
+    font-size: 0.8rem;
+  }
+
+  .project-description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-medium {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-info-content {
+    padding: 1rem;
+  }
+
+  .project-date {
+    font-size: 0.75rem;
+  }
+
+  .project-description {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-medium {
+    font-size: 0.75rem;
+  }
 }
 </style>
