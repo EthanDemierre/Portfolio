@@ -1,39 +1,54 @@
 <template>
-  <section
-    ref="nav"
-    :class="['navigation', { 'navigation--active': showNav }]"
-  >
-    <slider />
-  </section>
+  <page-nav />
 
-  <main class="grid-container">
-    <button ref="menuBtn" @click="toggleNav">
-      <img src="/img/menu.svg" alt="menu" />
-    </button>
-
-    <section class="content grid-item-main">
-      <div class="contact-form">
-        <b>Envoie moi un message.</b>
-        <form @submit.prevent="sendMessage">
+  <main class="page-main">
+    <section class="contact-content">
+      <div class="contact-form-wrapper">
+        <h2>Envoie moi un message.</h2>
+        <form @submit.prevent="sendMessage" class="contact-form">
           <div class="form-row">
-            <input v-model="form.firstName" type="text" placeholder="Ethan" required />
-            <input v-model="form.lastName" type="text" placeholder="Demierre" required />
+            <input
+              v-model="form.firstName"
+              type="text"
+              placeholder="Ethan"
+              class="form-input"
+              required
+            />
+            <input
+              v-model="form.lastName"
+              type="text"
+              placeholder="Demierre"
+              class="form-input"
+              required
+            />
           </div>
           <div class="form-row">
-            <input v-model="form.email" type="email" placeholder="ethandemierre@gmail.com" required />
-            <input v-model="form.phone" type="tel" placeholder="079/657/54/43" />
+            <input
+              v-model="form.email"
+              type="email"
+              placeholder="ethandemierre@gmail.com"
+              class="form-input"
+              required
+            />
+            <input
+              v-model="form.phone"
+              type="tel"
+              placeholder="079/657/54/43"
+              class="form-input"
+            />
           </div>
-          <textarea v-model="form.message" placeholder="Je t’aime ethan" required></textarea>
-          <button type="submit">Envoyez</button>
+          <textarea
+            v-model="form.message"
+            placeholder="Je t'aime ethan"
+            class="form-textarea"
+            required
+          ></textarea>
+          <button type="submit" class="submit-btn">Envoyez</button>
         </form>
 
-        <p v-if="successMessage" class="success">{{ successMessage }}</p>
-        <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+        <p v-if="successMessage" class="success-msg">{{ successMessage }}</p>
+        <p v-if="errorMessage" class="error-msg">{{ errorMessage }}</p>
       </div>
-    </section>
-
-    <section class="quote grid-item-quote">
-   
     </section>
   </main>
 </template>
@@ -43,34 +58,7 @@ import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 import emailjs from 'emailjs-com'
 
 const showNav = ref(false)
-const nav = ref(null)
-const menuBtn = ref(null)
 
-const toggleNav = () => {
-  showNav.value = !showNav.value
-}
-
-const handleClickOutside = (event) => {
-  if (
-    showNav.value &&
-    nav.value &&
-    !nav.value.contains(event.target) &&
-    menuBtn.value &&
-    !menuBtn.value.contains(event.target)
-  ) {
-    showNav.value = false
-  }
-}
-
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
-
-onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
-
-// EmailJS config
 const form = reactive({
   firstName: '',
   lastName: '',
@@ -99,27 +87,15 @@ const sendMessage = () => {
     })
     .catch(() => {
       successMessage.value = ''
-      errorMessage.value = 'Erreur lors de l’envoi. Réessaie plus tard.'
+      errorMessage.value = 'Erreur lors de l\'envoi. Réessaie plus tard.'
     })
 }
 </script>
 
 <style scoped>
-.navigation {
-  position: absolute;
-  z-index: 5;
-  width: 25%;
-  height: 100vh;
-  background-color: var(--blue);
-  box-shadow: 0 0px 10px rgb(0, 0, 0);
-  transform: translateX(-100%);
-  transition: transform 0.4s ease-in-out;
-}
-.navigation--active {
-  transform: translateX(0);
-}
-
-.grid-container {
+.page-main {
+  position: relative;
+  z-index: 20;
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
@@ -127,29 +103,91 @@ const sendMessage = () => {
   grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
+  pointer-events: none;
 }
 
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
+.page-main > * {
+  pointer-events: auto;
 }
 
-.grid-item-main {
-  grid-column: 4 / span 6;
-  grid-row: 4 / span 6;
+@media (max-width: 1440px) {
+  .page-main {
+    padding: 1.75rem;
+    border-width: 0.9rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .page-main {
+    padding: 1.5rem;
+    border-width: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-main {
+    padding: 1rem;
+    border-width: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-main {
+    padding: 0.75rem;
+    border-width: 0.35rem;
+  }
+}
+
+.contact-content {
+  grid-column: 3 / span 8;
+  grid-row: 3 / span 8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+@media (max-width: 1440px) {
+  .contact-content {
+    grid-column: 3 / span 8;
+    grid-row: 3 / span 8;
+  }
+}
+
+@media (max-width: 1024px) {
+  .contact-content {
+    grid-column: 2 / span 10;
+    grid-row: 3 / span 8;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-content {
+    grid-column: 1 / span 12;
+    grid-row: 2 / span 10;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-content {
+    grid-column: 1 / -1;
+    grid-row: 2 / span 10;
+    padding: 1rem;
+  }
+}
+
+.contact-form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  font-family: monospace;
-}
-
-.contact-form h1 {
-  font-size: 2rem;
-  font-weight: bold;
 }
 
 .form-row {
@@ -157,60 +195,92 @@ button {
   gap: 1rem;
 }
 
-input,
-textarea {
-  width: 100%;
+@media (max-width: 768px) {
+  .form-row {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+.form-input,
+.form-textarea {
   padding: 1rem;
-  font-family: monospace;
-  border: 1px solid black;
+  font-family: inherit;
+  border: 1px solid var(--black);
   font-size: 1rem;
-  margin: 0.5rem;
 }
 
-textarea {
+.form-input {
+  flex: 1;
+}
+
+.form-textarea {
+  width: 100%;
   min-height: 150px;
+  resize: vertical;
 }
 
-button[type="submit"] {
-  font-weight: bold;
-  font-style: italic;
+@media (max-width: 768px) {
+  .form-input,
+  .form-textarea {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .form-textarea {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-input,
+  .form-textarea {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .form-textarea {
+    min-height: 100px;
+  }
+}
+
+.submit-btn {
+  padding: 1rem 2rem;
   background-color: var(--blue);
   color: white;
-  padding: 1rem 2rem;
   border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-style: italic;
   width: fit-content;
+  align-self: center;
 }
 
-.success {
+@media (max-width: 480px) {
+  .submit-btn {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+  }
+}
+
+.success-msg {
   color: green;
+  text-align: center;
 }
 
-.error {
+.error-msg {
   color: red;
+  text-align: center;
 }
 
-.grid-item-quote {
-  grid-column: 10 / span 3;
-  grid-row: 10 / span 2;
-  align-self: end;
-  justify-self: start;
-  font-family: monospace;
-}
-
-.quote p {
-  width: 75%;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
-  text-align: left;
-}
-
-b {
-  color: #000;
-font-family: "Coral Pixels";
-font-size: 2rem;
-font-style: normal;
-font-weight: 400;
-line-height: 1rem; /* 50% */
-letter-spacing: 0.1rem;
+h2 {
+  width: 100%;
+  text-align: center;
 }
 </style>

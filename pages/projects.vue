@@ -1,45 +1,23 @@
 <template>
-  <section
-    ref="nav"
-    :class="['navigation', { 'navigation--active': showNav }]">
-    <slider />
-  </section>
+  <page-nav />
 
- 
-
-
-  <main class="grid-container">
-    <rain />
-    <button ref="menuBtn" @click="toggleNav">
-      <img src="public/img/menu.svg" alt="">
-    </button>
-    <section class="quote grid-item-quote">
+  <main class="page-main">
+    <section class="projects-content">
+      <div class="projects-header">
+        <h2>Projets</h2>
+      </div>
+      
+      <div class="projects-grid">
+        <!-- Projects will be added here -->
+      </div>
     </section>
   </main>
 </template>
 
 <style scoped>
-.navigation {
-  position: absolute;
-  z-index: 5;
-  width: 25%;
-  height: 100vh;
-  background-color: var(--blue);
-  box-shadow: 0 0px 10px rgb(0, 0, 0);
-  transform: translateX(-100%);
-  transition: transform 0.4s ease-in-out;
-}
-
-.navigation--active {
-  transform: translateX(0);
-}
-
-button {
-  background: none;
-  border: none;
-}
-
-.grid-container {
+.page-main {
+  position: relative;
+  z-index: 20;
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
@@ -47,67 +25,96 @@ button {
   grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
+  pointer-events: none;
 }
 
-
-
-
-
-.grid-item-quote {
-  grid-column: 10 / span 3;
-  grid-row: 10 / span 2;
-  align-self: end;
-  justify-self: start;
-}
-
-
-
-iframe {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: 0;
-}
-
-main {
-  position: relative;
+.page-main > * {
   pointer-events: auto;
 }
-</style>
 
-<script>
-export default {
-  data() {
-    return {
-      showNav: false
-    };
-  },
-  methods: {
-    toggleNav() {
-      this.showNav = !this.showNav;
-    },
-    handleClickOutside(event) {
-      const nav = this.$refs.nav;
-      const menuBtn = this.$refs.menuBtn;
-      if (
-        this.showNav &&
-        nav &&
-        !nav.contains(event.target) &&
-        menuBtn &&
-        !menuBtn.contains(event.target)
-      ) {
-        this.showNav = false;
-      }
-    }
-  },
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside);
-  },
-  beforeUnmount() {
-    document.removeEventListener('click', this.handleClickOutside);
+@media (max-width: 1440px) {
+  .page-main {
+    padding: 1.75rem;
+    border-width: 0.9rem;
   }
-};
-</script>
+}
 
+@media (max-width: 1024px) {
+  .page-main {
+    padding: 1.5rem;
+    border-width: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-main {
+    padding: 1rem;
+    border-width: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-main {
+    padding: 0.75rem;
+    border-width: 0.35rem;
+  }
+}
+
+.projects-content {
+  grid-column: 2 / span 10;
+  grid-row: 3 / span 8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  pointer-events: auto;
+}
+
+@media (max-width: 1024px) {
+  .projects-content {
+    grid-column: 2 / span 10;
+    grid-row: 3 / span 8;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-content {
+    grid-column: 1 / span 12;
+    grid-row: 2 / span 10;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-content {
+    grid-column: 1 / -1;
+    grid-row: 2 / span 10;
+    padding: 1rem;
+  }
+}
+
+.projects-header {
+  width: 100%;
+  text-align: center;
+}
+
+.projects-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+</style>

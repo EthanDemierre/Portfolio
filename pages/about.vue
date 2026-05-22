@@ -1,142 +1,200 @@
 <template>
-  <section
-    ref="nav"
-    :class="['navigation', { 'navigation--active': showNav }]">
-    <slider />
-  </section>
+  <page-nav />
 
-  <main class="grid-container">
-    <!-- Bouton menu -->
-    <button ref="menuBtn" @click="toggleNav">
-      <img src="public/img/menu.svg" alt="menu">
-    </button>
+  <main class="page-main">
+    <section class="about-content">
+      <div class="about-container">
+        <h2>À propos</h2>
+        <div class="about-squares">
+          <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
+            <rect width="68" height="68" fill="#2600FF"/>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
+            <rect width="68" height="68" fill="#FF0000"/>
+          </svg>
+        </div>
 
-    <!-- Carrés centrés -->
-    <div class="carre-wrapper">
-      <div class="carre">
-        <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
-          <rect width="68" height="68" fill="#2600FF"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
-          <rect width="68" height="68" fill="#FF0000"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- Texte -->
-    <section class="content">
-      <div class="aboutme">
-        <p>
-          J'ai 21 ans et je viens de terminer mes études à l’ERACOM. Passionné par la création sous toutes ses formes,
-          j'aime imaginer, construire, transformer des idées en expériences visuelles et interactives. Le mixmedia est pour moi un super moyen d’expression.
-        </p>
-        <p>
-          Si je devais m’identifier à des couleurs je serais le rouge (<span style="color: red;">FF0000</span>) et le bleu (<span style="color: #2600FF;">2600FF</span>)
-          car...
-        </p>
+        <div class="about-text">
+          <p>
+            J'ai 21 ans et je viens de terminer mes études à l'ERACOM. Passionné par la création sous toutes ses formes,
+            j'aime imaginer, construire, transformer des idées en expériences visuelles et interactives. Le mixmedia est pour moi un super moyen d'expression.
+          </p>
+          <p>
+            Si je devais m'identifier à des couleurs je serais le rouge (<span class="red-text">FF0000</span>) et le bleu (<span class="blue-text">2600FF</span>)
+            car...
+          </p>
+        </div>
       </div>
     </section>
   </main>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      showNav: false
-    };
-  },
-  methods: {
-    toggleNav() {
-      this.showNav = !this.showNav;
-    },
-    handleClickOutside(event) {
-      const nav = this.$refs.nav;
-      const menuBtn = this.$refs.menuBtn;
-      if (
-        this.showNav &&
-        nav &&
-        !nav.contains(event.target) &&
-        menuBtn &&
-        !menuBtn.contains(event.target)
-      ) {
-        this.showNav = false;
-      }
-    }
-  },
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside);
-  },
-  beforeUnmount() {
-    document.removeEventListener('click', this.handleClickOutside);
-  }
-};
-</script>
-
 <style scoped>
-:root {
-  --blue: #2600FF;
-}
-
-.navigation {
-  position: absolute;
-  z-index: 5;
-  width: 25%;
-  height: 100vh;
-  background-color: var(--blue);
-  box-shadow: 0 0px 10px rgb(0, 0, 0);
-  transform: translateX(-100%);
-  transition: transform 0.4s ease-in-out;
-}
-
-.navigation--active {
-  transform: translateX(0);
-}
-
-.grid-container {
+.page-main {
+  position: relative;
+  z-index: 20;
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
-  position: relative;
+  pointer-events: none;
+}
 
+.page-main > * {
+  pointer-events: auto;
+}
+
+@media (max-width: 1440px) {
+  .page-main {
+    padding: 1.75rem;
+    border-width: 0.9rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .page-main {
+    padding: 1.5rem;
+    border-width: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-main {
+    padding: 1rem;
+    border-width: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-main {
+    padding: 0.75rem;
+    border-width: 0.35rem;
+  }
+}
+
+.about-content {
+  grid-column: 2 / span 10;
+  grid-row: 3 / span 8;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: white;
-}
-
-button {
-  background: none;
-  border: none;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 10;
-}
-
-.carre-wrapper {
-  flex-grow: 1;
-  display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
 }
 
-.carre {
+@media (max-width: 1440px) {
+  .about-content {
+    grid-column: 2 / span 10;
+    grid-row: 3 / span 8;
+  }
+}
+
+@media (max-width: 1024px) {
+  .about-content {
+    grid-column: 2 / span 10;
+    grid-row: 3 / span 8;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    grid-column: 1 / span 12;
+    grid-row: 2 / span 10;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-content {
+    grid-column: 1 / -1;
+    grid-row: 2 / span 10;
+    padding: 1rem;
+  }
+}
+
+.about-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  gap: 600px; /* Espace large entre les deux carrés */
+  gap: 2rem;
+  text-align: center;
+  width: 100%;
 }
 
-.aboutme {
+.about-squares {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .about-squares {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-squares {
+    gap: 1rem;
+  }
+}
+
+.about-squares svg {
+  width: 68px;
+  height: 68px;
+}
+
+@media (max-width: 768px) {
+  .about-squares svg {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-squares svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.about-text {
   max-width: 800px;
-  margin: 0 auto;
   text-align: left;
   font-family: monospace;
-  font-size: 14px;
-  padding-bottom: 2rem;
   line-height: 1.6;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .about-text p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-text p {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.red-text {
+  color: red;
+}
+
+.blue-text {
+  color: #2600FF;
+}
+
+h2 {
+  width: 100%;
 }
 </style>
