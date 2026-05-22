@@ -9,10 +9,73 @@
     <button ref="menuBtn" @click="toggleNav">
       <img src="public/img/menu.svg" alt="">
     </button>
-    <section class="quote grid-item-quote">
-    </section>
+
+    <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
+      <div class="projects-list" :style="{ transform: `translateY(${scrollPosition}px)` }">
+        <div v-for="project in projects" :key="project.id" class="project-item">
+          <img :src="project.image" :alt="project.title" class="project-image" />
+        </div>
+      </div>
+    </div>
   </main>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      showNav: false,
+      scrollPosition: 0,
+      isScrolling: true,
+      scrollSpeed: 1,
+      projects: [
+        { id: 1, title: 'Projet 1', image: '/img/projet/projet1.png' }
+      ]
+    };
+  },
+  methods: {
+    toggleNav() {
+      this.showNav = !this.showNav;
+    },
+    handleClickOutside(event) {
+      const nav = this.$refs.nav;
+      const menuBtn = this.$refs.menuBtn;
+      if (
+        this.showNav &&
+        nav &&
+        !nav.contains(event.target) &&
+        menuBtn &&
+        !menuBtn.contains(event.target)
+      ) {
+        this.showNav = false;
+      }
+    },
+    pauseScroll() {
+      this.isScrolling = false;
+    },
+    resumeScroll() {
+      this.isScrolling = true;
+    },
+    animateScroll() {
+      if (this.isScrolling) {
+        this.scrollPosition -= this.scrollSpeed;
+        const totalHeight = this.projects.length * 600;
+        if (-this.scrollPosition > totalHeight) {
+          this.scrollPosition = 0;
+        }
+      }
+      requestAnimationFrame(this.animateScroll);
+    }
+  },
+  mounted() {
+    document.addEventListener('click', this.handleClickOutside);
+    this.animateScroll();
+  },
+  beforeUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+};
+</script>
 
 <style scoped>
 .navigation {
@@ -72,6 +135,8 @@ button {
   grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
+  background-color: white;
+  overflow: hidden;
 }
 
 @media (max-width: 1440px) {
@@ -102,88 +167,73 @@ button {
   }
 }
 
-.grid-item-quote {
-  grid-column: 10 / span 3;
-  grid-row: 10 / span 2;
-  align-self: end;
-  justify-self: start;
+.projects-scroll-container {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
 }
 
-@media (max-width: 1440px) {
-  .grid-item-quote {
-    grid-column: 9 / span 4;
-    grid-row: 10 / span 2;
-  }
-}
-
-@media (max-width: 1024px) {
-  .grid-item-quote {
-    grid-column: 8 / span 5;
-    grid-row: 9 / span 2;
-  }
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+  will-change: transform;
 }
 
 @media (max-width: 768px) {
-  .grid-item-quote {
-    grid-column: 1 / span 12;
-    grid-row: 8 / span 2;
-    align-self: auto;
-    justify-self: auto;
+  .projects-list {
+    gap: 1.5rem;
+    padding: 0.75rem;
   }
 }
 
 @media (max-width: 480px) {
-  .grid-item-quote {
-    grid-column: 1 / -1;
-    grid-row: 7 / span 3;
+  .projects-list {
+    gap: 1rem;
+    padding: 0.5rem;
   }
 }
 
-iframe {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  border: 0;
+.project-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-main {
-  position: relative;
-  pointer-events: auto;
+.project-item:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 1024px) {
+  .project-item {
+    min-height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-item {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-item {
+    min-height: 250px;
+  }
+}
+
+.project-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: 1px solid var(--black);
 }
 </style>
-
-<script>
-export default {
-  data() {
-    return {
-      showNav: false
-    };
-  },
-  methods: {
-    toggleNav() {
-      this.showNav = !this.showNav;
-    },
-    handleClickOutside(event) {
-      const nav = this.$refs.nav;
-      const menuBtn = this.$refs.menuBtn;
-      if (
-        this.showNav &&
-        nav &&
-        !nav.contains(event.target) &&
-        menuBtn &&
-        !menuBtn.contains(event.target)
-      ) {
-        this.showNav = false;
-      }
-    }
-  },
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside);
-  },
-  beforeUnmount() {
-    document.removeEventListener('click', this.handleClickOutside);
-  }
-};
-</script>
