@@ -12,10 +12,10 @@
 
     <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
       <div class="projects-list" :style="{ transform: getLoopedTransform() }">
-        <div v-for="project in projects" :key="project.id" class="project-item" @mouseenter="hoveredProject = project.id" @mouseleave="hoveredProject = null">
+        <div v-for="(project, index) in projects" :key="index" class="project-item" @mouseenter="hoveredIndex = index" @mouseleave="hoveredIndex = -1">
           <div class="project-image-wrapper">
-            <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredProject === project.id }" />
-            <div v-if="hoveredProject === project.id" class="project-info">
+            <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredIndex === index }" />
+            <div v-if="hoveredIndex === index" class="project-info">
               <div class="project-info-content">
                 <p class="project-date">{{ project.date }}</p>
                 <p class="project-description">{{ project.description }}</p>
@@ -37,7 +37,7 @@ export default {
       scrollPosition: 0,
       isScrolling: true,
       scrollSpeed: 3,
-      hoveredProject: null,
+      hoveredIndex: -1,
       projects: [
         {
           id: 1,
