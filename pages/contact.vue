@@ -86,6 +86,7 @@ const sendMessage = () => {
   grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
+  background-color: white;
 }
 
 @media (max-width: 1440px) {
@@ -148,9 +149,7 @@ const sendMessage = () => {
   flex-direction: column;
   gap: 1rem;
   font-family: monospace;
-  background-color: white;
   padding: 2rem;
-  border-radius: 4px;
 }
 
 @media (max-width: 768px) {
