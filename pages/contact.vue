@@ -1,16 +1,7 @@
 <template>
-  <section
-    ref="nav"
-    :class="['navigation', { 'navigation--active': showNav }]"
-  >
-    <slider />
-  </section>
+  <page-nav />
 
   <main class="grid-container">
-    <button ref="menuBtn" @click="toggleNav">
-      <img src="/img/menu.svg" alt="menu" />
-    </button>
-
     <section class="content grid-item-main">
       <div class="contact-form">
         <b>Envoie moi un message.</b>
@@ -24,7 +15,7 @@
             <input v-model="form.phone" type="tel" placeholder="079/657/54/43" />
           </div>
           <textarea v-model="form.message" placeholder="Je t'aime ethan" required></textarea>
-          <button type="submit">Envoyez</button>
+          <button type="submit" class="submit-btn">Envoyez</button>
         </form>
 
         <p v-if="successMessage" class="success">{{ successMessage }}</p>
@@ -33,42 +24,17 @@
     </section>
 
     <section class="quote grid-item-quote">
-   
+
     </section>
   </main>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import emailjs from 'emailjs-com'
 
-const showNav = ref(false)
-const nav = ref(null)
-const menuBtn = ref(null)
-
-const toggleNav = () => {
-  showNav.value = !showNav.value
-}
-
-const handleClickOutside = (event) => {
-  if (
-    showNav.value &&
-    nav.value &&
-    !nav.value.contains(event.target) &&
-    menuBtn.value &&
-    !menuBtn.value.contains(event.target)
-  ) {
-    showNav.value = false
-  }
-}
-
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
   emailjs.init('5II7cZTJAkDhnbIrR')
-})
-
-onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickOutside)
 })
 
 const form = reactive({
@@ -112,45 +78,6 @@ const sendMessage = () => {
 </script>
 
 <style scoped>
-.navigation {
-  position: absolute;
-  z-index: 25;
-  width: 25%;
-  height: 100vh;
-  background-color: var(--blue);
-  box-shadow: 0 0px 10px rgb(0, 0, 0);
-  transform: translateX(-100%);
-  transition: transform 0.4s ease-in-out;
-}
-
-@media (max-width: 1440px) {
-  .navigation {
-    width: 30%;
-  }
-}
-
-@media (max-width: 1024px) {
-  .navigation {
-    width: 40%;
-  }
-}
-
-@media (max-width: 768px) {
-  .navigation {
-    width: 60%;
-  }
-}
-
-@media (max-width: 480px) {
-  .navigation {
-    width: 100%;
-  }
-}
-
-.navigation--active {
-  transform: translateX(0);
-}
-
 .grid-container {
   box-sizing: border-box;
   width: 100vw;
@@ -189,16 +116,6 @@ const sendMessage = () => {
   }
 }
 
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 10;
-}
-
 .grid-item-main {
   grid-column: 4 / span 6;
   grid-row: 4 / span 6;
@@ -231,6 +148,21 @@ button {
   flex-direction: column;
   gap: 1rem;
   font-family: monospace;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 1rem;
+  }
 }
 
 .form-row {
@@ -279,6 +211,7 @@ textarea {
 
 textarea {
   min-height: 150px;
+  margin-bottom: 0;
 }
 
 @media (max-width: 480px) {
@@ -287,7 +220,7 @@ textarea {
   }
 }
 
-button[type="submit"] {
+.submit-btn {
   font-weight: bold;
   font-style: italic;
   background-color: var(--blue);
@@ -296,10 +229,11 @@ button[type="submit"] {
   border: none;
   width: fit-content;
   cursor: pointer;
+  align-self: center;
 }
 
 @media (max-width: 480px) {
-  button[type="submit"] {
+  .submit-btn {
     width: 100%;
     padding: 0.875rem 1.5rem;
   }
