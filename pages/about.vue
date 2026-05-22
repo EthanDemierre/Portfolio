@@ -6,12 +6,10 @@
   </section>
 
   <main class="grid-container">
-    <!-- Bouton menu -->
     <button ref="menuBtn" @click="toggleNav">
       <img src="public/img/menu.svg" alt="menu">
     </button>
 
-    <!-- Carrés centrés -->
     <div class="carre-wrapper">
       <div class="carre">
         <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
@@ -23,15 +21,14 @@
       </div>
     </div>
 
-    <!-- Texte -->
     <section class="content">
       <div class="aboutme">
         <p>
-          J'ai 21 ans et je viens de terminer mes études à l’ERACOM. Passionné par la création sous toutes ses formes,
-          j'aime imaginer, construire, transformer des idées en expériences visuelles et interactives. Le mixmedia est pour moi un super moyen d’expression.
+          J'ai 21 ans et je viens de terminer mes études à l'ERACOM. Passionné par la création sous toutes ses formes,
+          j'aime imaginer, construire, transformer des idées en expériences visuelles et interactives. Le mixmedia est pour moi un super moyen d'expression.
         </p>
         <p>
-          Si je devais m’identifier à des couleurs je serais le rouge (<span style="color: red;">FF0000</span>) et le bleu (<span style="color: #2600FF;">2600FF</span>)
+          Si je devais m'identifier à des couleurs je serais le rouge (<span class="red-text">FF0000</span>) et le bleu (<span class="blue-text">2600FF</span>)
           car...
         </p>
       </div>
@@ -80,7 +77,7 @@ export default {
 
 .navigation {
   position: absolute;
-  z-index: 5;
+  z-index: 25;
   width: 25%;
   height: 100vh;
   background-color: var(--blue);
@@ -89,22 +86,32 @@ export default {
   transition: transform 0.4s ease-in-out;
 }
 
-.navigation--active {
-  transform: translateX(0);
+@media (max-width: 1440px) {
+  .navigation {
+    width: 30%;
+  }
 }
 
-.grid-container {
-  box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem;
-  border: 1rem solid var(--blue);
-  position: relative;
+@media (max-width: 1024px) {
+  .navigation {
+    width: 40%;
+  }
+}
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: white;
+@media (max-width: 768px) {
+  .navigation {
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    width: 100%;
+  }
+}
+
+.navigation--active {
+  transform: translateX(0);
 }
 
 button {
@@ -114,6 +121,20 @@ button {
   top: 1rem;
   left: 1rem;
   z-index: 10;
+  cursor: pointer;
+}
+
+.grid-container {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  padding: 2rem;
+  border: 1rem solid var(--blue);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
 }
 
 .carre-wrapper {
@@ -127,7 +148,62 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 600px; /* Espace large entre les deux carrés */
+  gap: 600px;
+}
+
+@media (max-width: 1440px) {
+  .carre {
+    gap: 500px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .carre {
+    gap: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carre {
+    gap: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carre {
+    gap: 80px;
+  }
+}
+
+.carre svg {
+  width: 68px;
+  height: 68px;
+}
+
+@media (max-width: 1024px) {
+  .carre svg {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carre svg {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carre svg {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.content {
+  margin-top: auto;
+  padding-bottom: 2rem;
 }
 
 .aboutme {
@@ -136,7 +212,37 @@ button {
   text-align: left;
   font-family: monospace;
   font-size: 14px;
-  padding-bottom: 2rem;
   line-height: 1.6;
+}
+
+.aboutme p {
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .aboutme {
+    max-width: 100%;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutme {
+    max-width: 100%;
+    font-size: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .aboutme p {
+    margin-bottom: 1rem;
+  }
+}
+
+.red-text {
+  color: red;
+}
+
+.blue-text {
+  color: #2600FF;
 }
 </style>

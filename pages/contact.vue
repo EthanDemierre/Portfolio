@@ -1,16 +1,7 @@
 <template>
-  <section
-    ref="nav"
-    :class="['navigation', { 'navigation--active': showNav }]"
-  >
-    <slider />
-  </section>
+  <page-nav />
 
   <main class="grid-container">
-    <button ref="menuBtn" @click="toggleNav">
-      <img src="/img/menu.svg" alt="menu" />
-    </button>
-
     <section class="content grid-item-main">
       <div class="contact-form">
         <b>Envoie moi un message.</b>
@@ -23,8 +14,8 @@
             <input v-model="form.email" type="email" placeholder="ethandemierre@gmail.com" required />
             <input v-model="form.phone" type="tel" placeholder="079/657/54/43" />
           </div>
-          <textarea v-model="form.message" placeholder="Je t’aime ethan" required></textarea>
-          <button type="submit">Envoyez</button>
+          <textarea v-model="form.message" placeholder="Je t'aime ethan" required></textarea>
+          <button type="submit" class="submit-btn">Envoyez</button>
         </form>
 
         <p v-if="successMessage" class="success">{{ successMessage }}</p>
@@ -33,44 +24,19 @@
     </section>
 
     <section class="quote grid-item-quote">
-   
+
     </section>
   </main>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import emailjs from 'emailjs-com'
 
-const showNav = ref(false)
-const nav = ref(null)
-const menuBtn = ref(null)
-
-const toggleNav = () => {
-  showNav.value = !showNav.value
-}
-
-const handleClickOutside = (event) => {
-  if (
-    showNav.value &&
-    nav.value &&
-    !nav.value.contains(event.target) &&
-    menuBtn.value &&
-    !menuBtn.value.contains(event.target)
-  ) {
-    showNav.value = false
-  }
-}
-
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
+  emailjs.init('5II7cZTJAkDhnbIrR')
 })
 
-onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
-
-// EmailJS config
 const form = reactive({
   firstName: '',
   lastName: '',
@@ -82,12 +48,16 @@ const form = reactive({
 const successMessage = ref('')
 const errorMessage = ref('')
 
-const SERVICE_ID = 'service_xxx'
-const TEMPLATE_ID = 'template_xxx'
-const PUBLIC_KEY = 'public_xxx'
-
 const sendMessage = () => {
-  emailjs.send(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY)
+  const templateParams = {
+    to_email: 'ethandemierre@gmail.com',
+    from_name: `${form.firstName} ${form.lastName}`,
+    from_email: form.email,
+    phone: form.phone,
+    message: form.message
+  }
+
+  emailjs.send('service_i092x4v', 'template_ksv7zxk', templateParams)
     .then(() => {
       successMessage.value = 'Message envoyé avec succès !'
       errorMessage.value = ''
@@ -96,29 +66,18 @@ const sendMessage = () => {
       form.email = ''
       form.phone = ''
       form.message = ''
+      setTimeout(() => {
+        successMessage.value = ''
+      }, 3000)
     })
     .catch(() => {
       successMessage.value = ''
-      errorMessage.value = 'Erreur lors de l’envoi. Réessaie plus tard.'
+      errorMessage.value = 'Erreur lors de l\'envoi. Réessaie plus tard.'
     })
 }
 </script>
 
 <style scoped>
-.navigation {
-  position: absolute;
-  z-index: 5;
-  width: 25%;
-  height: 100vh;
-  background-color: var(--blue);
-  box-shadow: 0 0px 10px rgb(0, 0, 0);
-  transform: translateX(-100%);
-  transition: transform 0.4s ease-in-out;
-}
-.navigation--active {
-  transform: translateX(0);
-}
-
 .grid-container {
   box-sizing: border-box;
   width: 100vw;
@@ -127,12 +86,35 @@ const sendMessage = () => {
   grid-template-columns: repeat(12, 1fr);
   padding: 2rem;
   border: 1rem solid var(--blue);
+  background-color: white;
 }
 
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
+@media (max-width: 1440px) {
+  .grid-container {
+    padding: 1.75rem;
+    border-width: 0.9rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid-container {
+    padding: 1.5rem;
+    border-width: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    padding: 1rem;
+    border-width: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-container {
+    padding: 0.75rem;
+    border-width: 0.35rem;
+  }
 }
 
 .grid-item-main {
@@ -140,21 +122,65 @@ button {
   grid-row: 4 / span 6;
 }
 
+@media (max-width: 1024px) {
+  .grid-item-main {
+    grid-column: 3 / span 7;
+    grid-row: 3 / span 7;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-item-main {
+    grid-column: 2 / span 10;
+    grid-row: 3 / span 8;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-item-main {
+    grid-column: 1 / -1;
+    grid-row: 2 / span 10;
+    padding: 1rem;
+  }
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   font-family: monospace;
+  padding: 2rem;
 }
 
-.contact-form h1 {
-  font-size: 2rem;
-  font-weight: bold;
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 1rem;
+  }
 }
 
 .form-row {
   display: flex;
   gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }
 
 input,
@@ -164,14 +190,36 @@ textarea {
   font-family: monospace;
   border: 1px solid black;
   font-size: 1rem;
-  margin: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  input,
+  textarea {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  input,
+  textarea {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
 }
 
 textarea {
   min-height: 150px;
+  margin-bottom: 0;
 }
 
-button[type="submit"] {
+@media (max-width: 480px) {
+  textarea {
+    min-height: 120px;
+  }
+}
+
+.submit-btn {
   font-weight: bold;
   font-style: italic;
   background-color: var(--blue);
@@ -179,6 +227,15 @@ button[type="submit"] {
   padding: 1rem 2rem;
   border: none;
   width: fit-content;
+  cursor: pointer;
+  align-self: center;
+}
+
+@media (max-width: 480px) {
+  .submit-btn {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+  }
 }
 
 .success {
@@ -197,6 +254,27 @@ button[type="submit"] {
   font-family: monospace;
 }
 
+@media (max-width: 1024px) {
+  .grid-item-quote {
+    grid-column: 9 / span 4;
+    grid-row: 10 / span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-item-quote {
+    grid-column: 1 / span 12;
+    grid-row: 9 / span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-item-quote {
+    grid-column: 1 / -1;
+    grid-row: 12 / span 2;
+  }
+}
+
 .quote p {
   width: 75%;
   margin-bottom: 0.5rem;
@@ -204,13 +282,47 @@ button[type="submit"] {
   text-align: left;
 }
 
+@media (max-width: 1024px) {
+  .quote p {
+    width: 85%;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .quote p {
+    width: 100%;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quote p {
+    width: 100%;
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
 b {
   color: #000;
-font-family: "Coral Pixels";
-font-size: 2rem;
-font-style: normal;
-font-weight: 400;
-line-height: 1rem; /* 50% */
-letter-spacing: 0.1rem;
+  font-family: "Coral Pixels";
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0.1rem;
+}
+
+@media (max-width: 768px) {
+  b {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  b {
+    font-size: 1.5rem;
+  }
 }
 </style>
