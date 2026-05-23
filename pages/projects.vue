@@ -31,63 +31,17 @@
 
 <script>
 export default {
+  async setup() {
+    const { data: projects } = await useFetch('/api/projects');
+    return { projects };
+  },
   data() {
     return {
       showNav: false,
       scrollPosition: 0,
       isScrolling: true,
       scrollSpeed: 3,
-      hoveredIndex: -1,
-      projects: [
-        {
-          id: 1,
-          title: 'Projet 1',
-          image: '/img/projet/projet1.png',
-          date: '2024',
-          description: 'Description courte du projet 1',
-          medium: 'Design / Web'
-        },
-        {
-          id: 2,
-          title: 'Projet 2',
-          image: '/img/projet/projet1.png',
-          date: '2024',
-          description: 'Description courte du projet 2',
-          medium: 'Animation / 3D'
-        },
-        {
-          id: 3,
-          title: 'Projet 3',
-          image: '/img/projet/projet1.png',
-          date: '2023',
-          description: 'Description courte du projet 3',
-          medium: 'Interactif / Code'
-        },
-        {
-          id: 4,
-          title: 'Projet 4',
-          image: '/img/projet/projet1.png',
-          date: '2023',
-          description: 'Description courte du projet 4',
-          medium: 'Motion / Video'
-        },
-        {
-          id: 5,
-          title: 'Projet 5',
-          image: '/img/projet/projet1.png',
-          date: '2023',
-          description: 'Description courte du projet 5',
-          medium: 'Illustration / Design'
-        },
-        {
-          id: 6,
-          title: 'Projet 6',
-          image: '/img/projet/projet1.png',
-          date: '2022',
-          description: 'Description courte du projet 6',
-          medium: 'Prototype / UX'
-        }
-      ]
+      hoveredIndex: -1
     };
   },
   methods: {
@@ -121,7 +75,7 @@ export default {
     },
     getLoopedTransform() {
       const itemHeight = 620;
-      const totalHeight = this.projects.length * itemHeight;
+      const totalHeight = this.projects?.length * itemHeight || 0;
       const position = ((this.scrollPosition % totalHeight) + totalHeight) % totalHeight;
       return `translateY(${-position}px)`;
     }
