@@ -63,6 +63,10 @@
 
 <script>
 export default {
+  async setup() {
+    const { data: fetchedProjects } = await useFetch('/api/projects');
+    return { fetchedProjects };
+  },
   data() {
     return {
       projects: [],
@@ -70,20 +74,18 @@ export default {
       message: null
     };
   },
-  async mounted() {
-    await this.loadProjects();
+  watch: {
+    fetchedProjects: {
+      immediate: true,
+      handler(newProjects) {
+        if (newProjects) {
+          this.projects = JSON.parse(JSON.stringify(newProjects));
+          this.originalProjects = JSON.parse(JSON.stringify(newProjects));
+        }
+      }
+    }
   },
   methods: {
-    async loadProjects() {
-      try {
-        const response = await fetch('/api/projects');
-        this.projects = await response.json();
-        this.originalProjects = JSON.parse(JSON.stringify(this.projects));
-      } catch (error) {
-        console.error('Erreur lors du chargement des projets:', error);
-        this.showMessage('Erreur lors du chargement', 'error');
-      }
-    },
     addProject() {
       const newId = Math.max(...this.projects.map(p => p.id), 0) + 1;
       this.projects.push({

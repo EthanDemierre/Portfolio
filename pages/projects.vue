@@ -31,25 +31,20 @@
 
 <script>
 export default {
+  async setup() {
+    const { data: projects } = await useFetch('/api/projects');
+    return { projects };
+  },
   data() {
     return {
       showNav: false,
       scrollPosition: 0,
       isScrolling: true,
       scrollSpeed: 3,
-      hoveredIndex: -1,
-      projects: []
+      hoveredIndex: -1
     };
   },
   methods: {
-    async loadProjects() {
-      try {
-        const response = await fetch('/api/projects');
-        this.projects = await response.json();
-      } catch (error) {
-        console.error('Erreur lors du chargement des projets:', error);
-      }
-    },
     toggleNav() {
       this.showNav = !this.showNav;
     },
@@ -80,15 +75,14 @@ export default {
     },
     getLoopedTransform() {
       const itemHeight = 620;
-      const totalHeight = this.projects.length * itemHeight;
+      const totalHeight = this.projects?.length * itemHeight || 0;
       const position = ((this.scrollPosition % totalHeight) + totalHeight) % totalHeight;
       return `translateY(${-position}px)`;
     }
   },
-  async mounted() {
+  mounted() {
     document.addEventListener('click', this.handleClickOutside);
     this.animateScroll();
-    await this.loadProjects();
   },
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
