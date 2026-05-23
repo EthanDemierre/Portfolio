@@ -155,30 +155,30 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 600px;
+  gap: 200px;
 }
 
 @media (max-width: 1440px) {
   .carre {
-    gap: 500px;
+    gap: 180px;
   }
 }
 
 @media (max-width: 1024px) {
   .carre {
-    gap: 300px;
+    gap: 150px;
   }
 }
 
 @media (max-width: 768px) {
   .carre {
-    gap: 150px;
+    gap: 100px;
   }
 }
 
 @media (max-width: 480px) {
   .carre {
-    gap: 80px;
+    gap: 60px;
   }
 }
 
@@ -218,7 +218,6 @@ button {
   width: 200px;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
