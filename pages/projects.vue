@@ -38,59 +38,18 @@ export default {
       isScrolling: true,
       scrollSpeed: 3,
       hoveredIndex: -1,
-      projects: [
-        {
-          id: 1,
-          title: 'Projet 1',
-          image: '/img/projet/projet1.png',
-          date: '2024',
-          description: 'Description courte du projet 1',
-          medium: 'Design / Web'
-        },
-        {
-          id: 2,
-          title: 'Projet 2',
-          image: '/img/projet/projet1.png',
-          date: '2024',
-          description: 'Description courte du projet 2',
-          medium: 'Animation / 3D'
-        },
-        {
-          id: 3,
-          title: 'Projet 3',
-          image: '/img/projet/projet1.png',
-          date: '2023',
-          description: 'Description courte du projet 3',
-          medium: 'Interactif / Code'
-        },
-        {
-          id: 4,
-          title: 'Projet 4',
-          image: '/img/projet/projet1.png',
-          date: '2023',
-          description: 'Description courte du projet 4',
-          medium: 'Motion / Video'
-        },
-        {
-          id: 5,
-          title: 'Projet 5',
-          image: '/img/projet/projet1.png',
-          date: '2023',
-          description: 'Description courte du projet 5',
-          medium: 'Illustration / Design'
-        },
-        {
-          id: 6,
-          title: 'Projet 6',
-          image: '/img/projet/projet1.png',
-          date: '2022',
-          description: 'Description courte du projet 6',
-          medium: 'Prototype / UX'
-        }
-      ]
+      projects: []
     };
   },
   methods: {
+    async loadProjects() {
+      try {
+        const response = await fetch('/api/projects');
+        this.projects = await response.json();
+      } catch (error) {
+        console.error('Erreur lors du chargement des projets:', error);
+      }
+    },
     toggleNav() {
       this.showNav = !this.showNav;
     },
@@ -126,9 +85,10 @@ export default {
       return `translateY(${-position}px)`;
     }
   },
-  mounted() {
+  async mounted() {
     document.addEventListener('click', this.handleClickOutside);
     this.animateScroll();
+    await this.loadProjects();
   },
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);

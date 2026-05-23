@@ -11,8 +11,11 @@
                 <a href="projects">Projets</a> 
             </ul>  
             <ul>
-                <a href="contact">Contact</a> 
-            </ul>  
+                <a href="contact">Contact</a>
+            </ul>
+            <ul>
+                <a href="cms">CMS</a>
+            </ul>
         </li>
     </main>
 </template>
