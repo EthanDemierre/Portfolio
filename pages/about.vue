@@ -27,17 +27,9 @@
     <section class="content">
       <div class="aboutme">
         <p>
-          J'ai 21 ans et je viens de terminer mes études à l'ERACOM. Passionné par la création sous toutes ses formes,
+          J'ai 22 ans titulaire d'un CFC <b> D'interactive média designer.</b>  Passionné par la création sous toutes ses formes,
           j'aime imaginer, construire, transformer des idées en expériences visuelles et interactives. Le mixmedia est pour moi un super moyen d'expression.
         </p>
-        <p>
-          Si je devais m'identifier à des couleurs je serais le rouge (<span class="red-text">FF0000</span>) et le bleu (<span class="blue-text">2600FF</span>)
-          car...
-        </p>
-        <div class="pdf-links">
-          <a href="/portfolio.pdf" download class="pdf-link">📄 Portfolio</a>
-          <a href="/cv.pdf" download class="pdf-link">📄 CV</a>
-        </div>
       </div>
     </section>
   </main>
