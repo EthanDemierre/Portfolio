@@ -12,8 +12,7 @@ type HydrationStrategies = {
 }
 type LazyComponent<T> = (T & DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }>)
 interface _GlobalComponents {
-      'BtnNav': typeof import("../components/btn-nav.vue")['default']
-    'PageNav': typeof import("../components/page-nav.vue")['default']
+      'PageNav': typeof import("../components/page-nav.vue")['default']
     'Rain': typeof import("../components/rain.vue")['default']
     'Slider': typeof import("../components/slider.vue")['default']
     'NuxtWelcome': typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
@@ -39,8 +38,7 @@ interface _GlobalComponents {
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
     'NuxtIsland': typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
     'NuxtRouteAnnouncer': IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
-      'LazyBtnNav': LazyComponent<typeof import("../components/btn-nav.vue")['default']>
-    'LazyPageNav': LazyComponent<typeof import("../components/page-nav.vue")['default']>
+      'LazyPageNav': LazyComponent<typeof import("../components/page-nav.vue")['default']>
     'LazyRain': LazyComponent<typeof import("../components/rain.vue")['default']>
     'LazySlider': LazyComponent<typeof import("../components/slider.vue")['default']>
     'LazyNuxtWelcome': LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
@@ -72,7 +70,6 @@ declare module 'vue' {
   export interface GlobalComponents extends _GlobalComponents { }
 }
 
-export const BtnNav: typeof import("../components/btn-nav.vue")['default']
 export const PageNav: typeof import("../components/page-nav.vue")['default']
 export const Rain: typeof import("../components/rain.vue")['default']
 export const Slider: typeof import("../components/slider.vue")['default']
@@ -99,7 +96,6 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const NuxtRouteAnnouncer: IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
-export const LazyBtnNav: LazyComponent<typeof import("../components/btn-nav.vue")['default']>
 export const LazyPageNav: LazyComponent<typeof import("../components/page-nav.vue")['default']>
 export const LazyRain: LazyComponent<typeof import("../components/rain.vue")['default']>
 export const LazySlider: LazyComponent<typeof import("../components/slider.vue")['default']>

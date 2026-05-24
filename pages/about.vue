@@ -7,7 +7,7 @@
 
   <main class="grid-container">
     <button ref="menuBtn" @click="toggleNav">
-      <img src="public/img/menu.svg" alt="menu">
+      <img src="/img/menu.svg" alt="menu">
     </button>
 
     <div class="carre-wrapper">

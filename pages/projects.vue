@@ -7,7 +7,7 @@
 
   <main class="grid-container">
     <button ref="menuBtn" @click="toggleNav">
-      <img src="public/img/menu.svg" alt="">
+      <img src="/img/menu.svg" alt="menu">
     </button>
 
     <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
@@ -74,8 +74,11 @@ export default {
       requestAnimationFrame(this.animateScroll);
     },
     getLoopedTransform() {
+      if (!this.projects || this.projects.length === 0) {
+        return `translateY(0px)`;
+      }
       const itemHeight = 620;
-      const totalHeight = this.projects?.length * itemHeight || 0;
+      const totalHeight = this.projects.length * itemHeight;
       const position = ((this.scrollPosition % totalHeight) + totalHeight) % totalHeight;
       return `translateY(${-position}px)`;
     }

@@ -306,7 +306,7 @@ textarea {
 
 b {
   color: #000;
-  font-family: "Coral Pixels";
+  font-family: 'coralpixel', sans-serif;
   font-size: 2rem;
   font-style: normal;
   font-weight: 400;
