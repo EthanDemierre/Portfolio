@@ -1,14 +1,7 @@
 <template>
-  <section
-    ref="nav"
-    :class="['navigation', { 'navigation--active': showNav }]">
-    <slider />
-  </section>
+  <page-nav />
 
   <main class="grid-container">
-    <button ref="menuBtn" @click="toggleNav">
-      <img src="/img/menu.svg" alt="menu">
-    </button>
 
     <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
       <div class="projects-list" :style="{ transform: getLoopedTransform() }">
@@ -37,7 +30,6 @@ export default {
   },
   data() {
     return {
-      showNav: false,
       scrollPosition: 0,
       isScrolling: true,
       scrollSpeed: 3,
@@ -45,22 +37,6 @@ export default {
     };
   },
   methods: {
-    toggleNav() {
-      this.showNav = !this.showNav;
-    },
-    handleClickOutside(event) {
-      const nav = this.$refs.nav;
-      const menuBtn = this.$refs.menuBtn;
-      if (
-        this.showNav &&
-        nav &&
-        !nav.contains(event.target) &&
-        menuBtn &&
-        !menuBtn.contains(event.target)
-      ) {
-        this.showNav = false;
-      }
-    },
     pauseScroll() {
       this.isScrolling = false;
     },
@@ -84,65 +60,12 @@ export default {
     }
   },
   mounted() {
-    document.addEventListener('click', this.handleClickOutside);
     this.animateScroll();
-  },
-  beforeUnmount() {
-    document.removeEventListener('click', this.handleClickOutside);
   }
 };
 </script>
 
 <style scoped>
-.navigation {
-  position: absolute;
-  z-index: 25;
-  width: 25%;
-  height: 100vh;
-  background-color: var(--blue);
-  box-shadow: 0 0px 10px rgb(0, 0, 0);
-  transform: translateX(-100%);
-  transition: transform 0.4s ease-in-out;
-}
-
-@media (max-width: 1440px) {
-  .navigation {
-    width: 30%;
-  }
-}
-
-@media (max-width: 1024px) {
-  .navigation {
-    width: 40%;
-  }
-}
-
-@media (max-width: 768px) {
-  .navigation {
-    width: 60%;
-  }
-}
-
-@media (max-width: 480px) {
-  .navigation {
-    width: 100%;
-  }
-}
-
-.navigation--active {
-  transform: translateX(0);
-}
-
-button {
-  background: none;
-  border: none;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 10;
-  cursor: pointer;
-}
-
 .grid-container {
   box-sizing: border-box;
   width: 100vw;
