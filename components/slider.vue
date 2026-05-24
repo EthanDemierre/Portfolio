@@ -1,35 +1,42 @@
 <template>
-    <main >
-        <li>
-            <ul>
-                <a href="/">Home</a> 
-            </ul>  
-            <ul>
-                <a href="about">À propos</a> 
-            </ul>  
-            <ul>
-                <a href="projects">Projets</a> 
-            </ul>  
-            <ul>
-                <a href="contact">Contact</a>
-            </ul>
-            <ul>
-                <a href="cms">CMS</a>
-            </ul>
-        </li>
-    </main>
+  <nav class="nav-menu">
+    <ul class="nav-list">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">À propos</a></li>
+      <li><a href="/projects">Projets</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/cms">CMS</a></li>
+    </ul>
+  </nav>
 </template>
 
 <style scoped>
-main {
-    width: 100%;
+.nav-menu {
+  width: 100%;
+  height: 100%;
 }
 
-ul {
-    display: flex;
-    justify-content: center;
-    padding: 2rem;
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style: none;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
+.nav-list li {
+  text-align: center;
+  padding: 1.5rem;
+}
 
+.nav-list a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-list a:hover {
+  opacity: 0.8;
+}
 </style>
