@@ -23,6 +23,10 @@
           J'ai 22 ans titulaire d'un CFC <b> D'interactive média designer.</b>  Passionné par la création sous toutes ses formes,
           j'aime imaginer, construire, transformer des idées en expériences visuelles et interactives. Le mixmedia est pour moi un super moyen d'expression.
         </p>
+        <div class="pdf-links">
+          <a href="/portfolio.pdf" download class="pdf-link">📄 Portfolio</a>
+          <a href="/cv.pdf" download class="pdf-link">📄 CV</a>
+        </div>
       </div>
     </section>
   </main>
