@@ -15,36 +15,42 @@
       <div class="projects-list">
         <div v-for="(project, index) in projects" :key="project.id" class="project-card">
           <div class="project-header">
-            <h3 class="project-title">{{ project.title }}</h3>
+            <div class="project-header-content">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <div class="project-meta">{{ project.date }} • {{ project.medium }}</div>
+            </div>
             <button @click="removeProject(index)" class="btn-delete" title="Supprimer">🗑️</button>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">Titre</label>
-            <input v-model="project.title" type="text" class="form-input" placeholder="Titre du projet">
-          </div>
+          <div class="form-fields-grid">
+            <div class="form-group">
+              <label class="form-label">Titre</label>
+              <input v-model="project.title" type="text" class="form-input">
+            </div>
 
-          <div class="form-group">
-            <label class="form-label">Date</label>
-            <input v-model="project.date" type="text" class="form-input" placeholder="2024">
+            <div class="form-group">
+              <label class="form-label">Date</label>
+              <input v-model="project.date" type="text" class="form-input" placeholder="2024">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Catégorie</label>
+              <input v-model="project.medium" type="text" class="form-input" placeholder="Design / Web">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">URL image</label>
+              <input v-model="project.image" type="text" class="form-input" placeholder="/img/projet/proj1.png">
+            </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">Description</label>
-            <textarea v-model="project.description" class="form-textarea" placeholder="Description du projet" rows="3"></textarea>
+            <textarea v-model="project.description" class="form-textarea" placeholder="Courte description..." rows="2"></textarea>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">Catégorie (Design, Animation, etc.)</label>
-            <input v-model="project.medium" type="text" class="form-input" placeholder="Ex: Design / Web">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">URL de l'image</label>
-            <input v-model="project.image" type="text" class="form-input" placeholder="/img/projet/projet1.png">
-            <div v-if="project.image" class="image-preview">
-              <img :src="project.image" :alt="project.title" class="preview-img">
-            </div>
+          <div v-if="project.image" class="image-preview-compact">
+            <img :src="project.image" :alt="project.title">
           </div>
         </div>
       </div>
@@ -145,7 +151,7 @@ export default {
 .cms-page {
   min-height: 100vh;
   background-color: white;
-  padding: 2rem;
+  padding: 1.25rem;
   font-family: 'DM Mono', monospace;
 }
 
@@ -153,13 +159,14 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 2px solid var(--blue);
+  gap: 1rem;
 }
 
 .cms-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--black);
   margin: 0;
   font-weight: 600;
@@ -169,12 +176,13 @@ export default {
   background: none;
   border: 2px solid var(--blue);
   color: var(--blue);
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
   cursor: pointer;
   font-family: 'DM Mono', monospace;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .back-btn:hover {
@@ -183,20 +191,20 @@ export default {
 }
 
 .cms-main {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .btn-add-project {
   display: block;
   width: 100%;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
   background-color: var(--blue);
   color: white;
   border: none;
-  border-radius: 4px;
-  font-size: 1.1rem;
+  border-radius: 3px;
+  font-size: 0.95rem;
   font-family: 'DM Mono', monospace;
   font-weight: 600;
   cursor: pointer;
@@ -205,51 +213,62 @@ export default {
 
 .btn-add-project:hover {
   background-color: #0066cc;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .empty-state {
   text-align: center;
-  padding: 3rem;
+  padding: 2rem;
   color: #999;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .projects-list {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
 .project-card {
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
   background-color: #fafafa;
   transition: all 0.3s ease;
 }
 
 .project-card:hover {
   border-color: var(--blue);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .project-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #ddd;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+}
+
+.project-header-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .project-title {
   margin: 0;
   color: var(--black);
-  font-size: 1.3rem;
-  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.project-meta {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 0.25rem;
 }
 
 .btn-delete {
@@ -265,26 +284,35 @@ export default {
   transform: scale(1.2);
 }
 
+.form-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 
 .form-label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   font-weight: 600;
   color: var(--black);
-  font-size: 0.95rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .form-input,
 .form-textarea {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 3px;
   font-family: 'DM Mono', monospace;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   transition: all 0.3s ease;
 }
 
@@ -292,46 +320,45 @@ export default {
 .form-textarea:focus {
   outline: none;
   border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
 }
 
 .form-textarea {
   resize: vertical;
-  min-height: 80px;
+  grid-column: 1 / -1;
 }
 
-.image-preview {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: white;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.preview-img {
-  max-width: 100%;
-  max-height: 200px;
-  object-fit: contain;
+.image-preview-compact {
+  margin-top: 0.75rem;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: white;
   border: 1px solid #ddd;
-  border-radius: 4px;
+}
+
+.image-preview-compact img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .cms-actions {
   display: flex;
-  gap: 1rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
   border-top: 2px solid var(--blue);
 }
 
 .btn-save,
 .btn-cancel {
   flex: 1;
-  padding: 1.25rem;
+  padding: 0.75rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
   font-family: 'DM Mono', monospace;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -344,8 +371,8 @@ export default {
 
 .btn-save:hover {
   background-color: #0066cc;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .btn-cancel {
@@ -392,17 +419,17 @@ export default {
 
 @media (max-width: 768px) {
   .cms-page {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .cms-header {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
     align-items: flex-start;
   }
 
   .cms-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .back-btn {
@@ -410,7 +437,11 @@ export default {
   }
 
   .project-card {
-    padding: 1rem;
+    padding: 0.75rem;
+  }
+
+  .form-fields-grid {
+    grid-template-columns: 1fr;
   }
 
   .cms-actions {
