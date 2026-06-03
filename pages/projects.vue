@@ -6,8 +6,8 @@
     <div class="projects-scroll-container">
       <div class="projects-list" :style="{ transform: getLoopedTransform() }">
         <div v-for="(project, index) in projects" :key="index" class="project-item">
-          <div class="project-image-wrapper" @mouseenter="pauseScrollAndHover(index)" @mouseleave="resumeScrollAndUnhover">
-            <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredIndex === index }" />
+          <div class="project-image-wrapper">
+            <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredIndex === index }" @mouseenter="pauseScrollAndHover(index)" @mouseleave="resumeScrollAndUnhover" />
             <div v-if="hoveredIndex === index" class="project-info">
               <div class="project-info-content">
                 <p class="project-date">{{ project.date }}</p>
