@@ -8,7 +8,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
           <rect width="68" height="68" fill="#2600FF"/>
         </svg>
-        <div class="photo-container">
+        <div class="photo-container" @click="showPhotoModal = true" role="button" tabindex="0" @keydown.enter="showPhotoModal = true">
           <img src="https://cdn.builder.io/api/v1/image/assets%2F08dd6309d008452ca33868c5e5cb97f5%2F3e0f522322254b0fbf96302741bf21dc" alt="Ethan Demierre" class="profile-photo">
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68" fill="none">
@@ -29,6 +29,13 @@
         </div>
       </div>
     </section>
+
+    <div v-if="showPhotoModal" class="photo-modal" @click="showPhotoModal = false">
+      <div class="photo-modal-content" @click.stop>
+        <button class="close-btn" @click="showPhotoModal = false">✕</button>
+        <img src="https://cdn.builder.io/api/v1/image/assets%2F08dd6309d008452ca33868c5e5cb97f5%2F3e0f522322254b0fbf96302741bf21dc" alt="Ethan Demierre" class="modal-photo">
+      </div>
+    </div>
   </main>
 </template>
 
