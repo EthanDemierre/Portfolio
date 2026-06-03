@@ -3,10 +3,10 @@
 
   <main class="grid-container">
 
-    <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
+    <div class="projects-scroll-container">
       <div class="projects-list" :style="{ transform: getLoopedTransform() }">
-        <div v-for="(project, index) in projects" :key="index" class="project-item" @mouseenter="hoveredIndex = index" @mouseleave="hoveredIndex = -1">
-          <div class="project-image-wrapper">
+        <div v-for="(project, index) in projects" :key="index" class="project-item">
+          <div class="project-image-wrapper" @mouseenter="pauseScrollAndHover(index)" @mouseleave="resumeScrollAndUnhover">
             <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredIndex === index }" />
             <div v-if="hoveredIndex === index" class="project-info">
               <div class="project-info-content">
@@ -37,11 +37,13 @@ export default {
     };
   },
   methods: {
-    pauseScroll() {
+    pauseScrollAndHover(index) {
       this.isScrolling = false;
+      this.hoveredIndex = index;
     },
-    resumeScroll() {
+    resumeScrollAndUnhover() {
       this.isScrolling = true;
+      this.hoveredIndex = -1;
     },
     animateScroll() {
       if (this.isScrolling) {
