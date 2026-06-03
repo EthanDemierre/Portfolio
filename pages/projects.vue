@@ -6,8 +6,8 @@
     <div class="projects-scroll-container">
       <div class="projects-list" :style="{ transform: getLoopedTransform() }">
         <div v-for="(project, index) in projects" :key="index" class="project-item">
-          <div class="project-image-wrapper">
-            <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredIndex === index }" @mouseenter="pauseScrollAndHover(index)" @mouseleave="resumeScrollAndUnhover" />
+          <div class="project-image-wrapper" @mouseenter="pauseScrollAndHover(index)" @mouseleave="resumeScrollAndUnhover">
+            <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredIndex === index }" />
             <div v-if="hoveredIndex === index" class="project-info">
               <div class="project-info-content">
                 <p class="project-date">{{ project.date }}</p>
@@ -173,11 +173,12 @@ export default {
 
 .project-image-wrapper {
   position: relative;
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
 }
 
 .project-image {
