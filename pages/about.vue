@@ -166,19 +166,40 @@
 @media (max-width: 768px) {
   .aboutme {
     max-width: 100%;
-    font-size: 13px;
+    font-size: 12px;
+  }
+
+  .pdf-links {
+    gap: 1rem;
+  }
+
+  .pdf-link {
+    padding: 0.65rem 1.25rem;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
   .aboutme {
     max-width: 100%;
-    font-size: 12px;
+    font-size: 11px;
     margin-bottom: 1rem;
   }
 
   .aboutme p {
     margin-bottom: 1rem;
+  }
+
+  .pdf-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .pdf-link {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 11px;
+    justify-content: center;
   }
 }
 

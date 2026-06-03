@@ -31,9 +31,35 @@
   padding: 1.5rem;
 }
 
+@media (max-width: 768px) {
+  .nav-list li {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-list li {
+    padding: 1rem;
+  }
+}
+
 .nav-list a {
   text-decoration: none;
   color: white;
+  font-size: 2rem;
+  transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .nav-list a {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-list a {
+    font-size: 1.25rem;
+  }
 }
 
 .nav-list a:hover {

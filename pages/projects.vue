@@ -128,15 +128,15 @@ export default {
 
 @media (max-width: 768px) {
   .projects-list {
-    gap: 1.5rem;
-    padding: 0.75rem;
+    gap: 1rem;
+    padding: 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .projects-list {
-    gap: 1rem;
-    padding: 0.5rem;
+    gap: 0.75rem;
+    padding: 0.25rem;
   }
 }
 
@@ -161,13 +161,13 @@ export default {
 
 @media (max-width: 768px) {
   .project-item {
-    min-height: 350px;
+    min-height: 300px;
   }
 }
 
 @media (max-width: 480px) {
   .project-item {
-    min-height: 250px;
+    min-height: 200px;
   }
 }
 
@@ -248,26 +248,7 @@ export default {
 
 @media (max-width: 768px) {
   .project-info-content {
-    padding: 1.5rem;
-  }
-
-  .project-date {
-    font-size: 0.8rem;
-  }
-
-  .project-description {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-
-  .project-medium {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .project-info-content {
-    padding: 1rem;
+    padding: 1.25rem;
   }
 
   .project-date {
@@ -275,12 +256,31 @@ export default {
   }
 
   .project-description {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     margin-bottom: 0.75rem;
   }
 
   .project-medium {
     font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-info-content {
+    padding: 0.75rem;
+  }
+
+  .project-date {
+    font-size: 0.65rem;
+  }
+
+  .project-description {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-medium {
+    font-size: 0.65rem;
   }
 }
 </style>

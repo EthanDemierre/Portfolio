@@ -169,6 +169,13 @@ const sendMessage = () => {
   gap: 1rem;
 }
 
+@media (max-width: 1024px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
 @media (max-width: 768px) {
   .form-row {
     flex-direction: column;

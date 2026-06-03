@@ -40,6 +40,13 @@
   border: 0;
   z-index: 2;
   pointer-events: auto;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .cables-iframe {
+    display: none;
+  }
 }
 
 .page-main {
