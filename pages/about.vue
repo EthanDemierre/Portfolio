@@ -232,25 +232,33 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .aboutme p {
   margin-bottom: 1.5rem;
   width: 100%;
-  max-width: 800px;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 @media (max-width: 768px) {
   .aboutme {
     max-width: 100%;
     font-size: 12px;
+    padding: 0;
+  }
+
+  .aboutme p {
     padding: 0 1.5rem;
   }
 
   .pdf-links {
     gap: 1rem;
     margin-top: 1.5rem;
+    padding: 0 1.5rem;
   }
 
   .pdf-link {
@@ -264,11 +272,12 @@ export default {
     max-width: 100%;
     font-size: 11px;
     margin-bottom: 1rem;
-    padding: 0 1rem;
+    padding: 0;
   }
 
   .aboutme p {
     margin-bottom: 1rem;
+    padding: 0 1rem;
   }
 
   .pdf-links {
@@ -301,7 +310,8 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  max-width: 800px;
+  padding: 0 2rem;
+  box-sizing: border-box;
 }
 
 .pdf-link {
