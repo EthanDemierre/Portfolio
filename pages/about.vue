@@ -218,11 +218,16 @@ export default {
 .content {
   margin-top: auto;
   padding-bottom: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .aboutme {
   max-width: 800px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 2rem;
   text-align: left;
   font-family: monospace;
   font-size: 14px;
@@ -237,10 +242,12 @@ export default {
   .aboutme {
     max-width: 100%;
     font-size: 12px;
+    padding: 0 1.5rem;
   }
 
   .pdf-links {
     gap: 1rem;
+    margin-top: 1.5rem;
   }
 
   .pdf-link {
@@ -254,6 +261,7 @@ export default {
     max-width: 100%;
     font-size: 11px;
     margin-bottom: 1rem;
+    padding: 0 1rem;
   }
 
   .aboutme p {
@@ -263,6 +271,8 @@ export default {
   .pdf-links {
     flex-direction: column;
     gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding: 0 1rem;
   }
 
   .pdf-link {
@@ -287,6 +297,7 @@ export default {
   margin-top: 2rem;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
 .pdf-link {
