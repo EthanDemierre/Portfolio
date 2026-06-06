@@ -40,7 +40,6 @@
   border: 0;
   z-index: 2;
   pointer-events: auto;
-  display: none;
 }
 
 @media (max-width: 768px) {
@@ -128,7 +127,7 @@
 @media (max-width: 480px) {
   .hero-content {
     grid-column: 1 / -1;
-    grid-row: 3 / span 4;
+    grid-row: 2 / span 5;
     padding: 1rem;
   }
 }
@@ -253,7 +252,8 @@
 @media (max-width: 480px) {
   .quote-section {
     grid-column: 1 / -1;
-    grid-row: 7 / span 3;
+    grid-row: 8 / span 3;
+    padding: 0 1rem;
   }
 }
 

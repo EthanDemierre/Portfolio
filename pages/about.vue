@@ -117,9 +117,15 @@ export default {
   }
 }
 
+@media (max-width: 768px) {
+  .carre {
+    gap: 80px;
+  }
+}
+
 @media (max-width: 480px) {
   .carre {
-    gap: 60px;
+    gap: 50px;
   }
 }
 
@@ -139,6 +145,13 @@ export default {
   .carre svg {
     width: 45px;
     height: 45px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carre svg {
+    width: 50px;
+    height: 50px;
   }
 }
 
@@ -188,10 +201,17 @@ export default {
   }
 }
 
+@media (max-width: 768px) {
+  .profile-photo {
+    width: 140px;
+    height: 140px;
+  }
+}
+
 @media (max-width: 480px) {
   .profile-photo {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
   }
 }
 

@@ -149,19 +149,19 @@ export default {
 
 @media (max-width: 1024px) {
   .project-item {
-    min-height: 450px;
+    min-height: 400px;
   }
 }
 
 @media (max-width: 768px) {
   .project-item {
-    min-height: 300px;
+    min-height: 280px;
   }
 }
 
 @media (max-width: 480px) {
   .project-item {
-    min-height: 200px;
+    min-height: 180px;
   }
 }
 

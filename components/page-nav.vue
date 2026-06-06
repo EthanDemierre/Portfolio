@@ -175,7 +175,13 @@ button.hamburger {
   }
 
   .hamburger--active .hamburger-line:nth-child(3) {
-    transform: rotate(-45deg) translateY(-0.45rem);
+  transform: rotate(-45deg) translateY(-0.45rem);
+}
+}
+
+@media (max-width: 768px) and (max-height: 600px) {
+  .navigation {
+    overflow-y: auto;
   }
 }
 

@@ -419,21 +419,22 @@ export default {
 
 @media (max-width: 768px) {
   .cms-page {
-    padding: 0.75rem;
+    padding: 1rem;
   }
 
   .cms-header {
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: flex-start;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
   }
 
   .cms-title {
     font-size: 1.25rem;
+    flex: 1;
   }
 
   .back-btn {
-    width: 100%;
+    white-space: nowrap;
   }
 
   .project-card {
@@ -442,6 +443,46 @@ export default {
 
   .form-fields-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cms-actions {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cms-page {
+    padding: 0.75rem;
+  }
+
+  .cms-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  .back-btn {
+    width: 100%;
+  }
+
+  .project-card {
+    padding: 0.6rem;
+  }
+
+  .btn-add-project {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .form-label {
+    font-size: 0.7rem;
+  }
+
+  .form-input,
+  .form-textarea {
+    font-size: 0.75rem;
+    padding: 0.4rem;
   }
 
   .cms-actions {
