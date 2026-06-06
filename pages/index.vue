@@ -30,6 +30,51 @@
   </main>
 </template>
 
+<script>
+export default {
+  mounted() {
+    const iframe = document.querySelector('.cables-iframe');
+    if (iframe) {
+      iframe.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        iframe.dispatchEvent(mouseEvent);
+      });
+
+      iframe.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousemove', {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        iframe.dispatchEvent(mouseEvent);
+      });
+
+      iframe.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        const mouseEvent = new MouseEvent('mouseup', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        });
+        iframe.dispatchEvent(mouseEvent);
+      });
+    }
+  }
+};
+</script>
+
 <style scoped>
 .cables-iframe {
   position: fixed;
@@ -40,6 +85,14 @@
   border: 0;
   z-index: 2;
   pointer-events: auto;
+  touch-action: auto;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cables-iframe {
+    pointer-events: auto !important;
+    touch-action: manipulation;
+  }
 }
 
 @media (max-width: 768px) {
@@ -195,26 +248,37 @@
   border: 1px solid;
   width: 33%;
   background-color: white;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+@media (max-width: 1440px) {
+  .role-box {
+    margin-top: 1.2rem;
+  }
 }
 
 @media (max-width: 1024px) {
   .role-box {
-    width: 35%;
+    width: 40%;
     padding: 1.1rem;
+    margin-top: 1rem;
   }
 }
 
 @media (max-width: 768px) {
   .role-box {
-    width: 50%;
+    width: 55%;
     padding: 1rem;
+    margin-top: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .role-box {
-    width: 100%;
+    width: 90%;
     padding: 0.75rem;
+    margin-top: 0.75rem;
   }
 }
 
