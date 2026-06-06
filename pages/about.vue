@@ -39,6 +39,37 @@
   </main>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      showPhotoModal: false
+    };
+  },
+  methods: {
+    handleEscape(e) {
+      if (e.key === 'Escape') {
+        this.showPhotoModal = false;
+      }
+    }
+  },
+  watch: {
+    showPhotoModal(newVal) {
+      if (newVal) {
+        document.addEventListener('keydown', this.handleEscape);
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.removeEventListener('keydown', this.handleEscape);
+        document.body.style.overflow = 'auto';
+      }
+    }
+  },
+  beforeUnmount() {
+    document.removeEventListener('keydown', this.handleEscape);
+    document.body.style.overflow = 'auto';
+  }
+};
+</script>
 
 <style scoped>
 .grid-container {
@@ -122,6 +153,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.photo-container:hover {
+  transform: scale(1.05);
+}
+
+.photo-container:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }
 
 .profile-photo {
@@ -129,6 +171,7 @@
   height: 200px;
   object-fit: cover;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  user-select: none;
 }
 
 @media (max-width: 1024px) {
@@ -223,6 +266,7 @@
   gap: 1.5rem;
   margin-top: 2rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .pdf-link {
@@ -245,6 +289,81 @@
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(38, 0, 255, 0.2);
+}
+
+.photo-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+.photo-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-photo {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: white;
+  border: 2px solid white;
+  color: var(--black);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  background-color: var(--blue);
+  color: white;
+  border-color: var(--blue);
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .close-btn {
+    top: -2rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {

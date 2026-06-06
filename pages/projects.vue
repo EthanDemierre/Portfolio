@@ -145,12 +145,6 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 600px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.project-item:hover {
-  transform: scale(1.02);
 }
 
 @media (max-width: 1024px) {
@@ -173,7 +167,7 @@ export default {
 
 .project-image-wrapper {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: fit-content;
@@ -186,7 +180,12 @@ export default {
   max-height: 100%;
   object-fit: contain;
   border: 1px solid var(--black);
-  transition: filter 0.3s ease;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.project-image:hover {
+  transform: scale(1.02);
 }
 
 .project-image.blurred {
