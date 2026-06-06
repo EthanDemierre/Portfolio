@@ -216,26 +216,29 @@ export default {
 }
 
 .content {
-  margin-top: auto;
-  padding-bottom: 2rem;
-  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding-bottom: 0;
 }
 
 .aboutme {
   max-width: 800px;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 2rem;
   text-align: left;
   font-family: monospace;
   font-size: 14px;
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
 }
 
 .aboutme p {
   margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 800px;
 }
 
 @media (max-width: 768px) {
@@ -298,6 +301,7 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  max-width: 800px;
 }
 
 .pdf-link {
