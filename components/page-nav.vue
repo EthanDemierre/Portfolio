@@ -54,8 +54,8 @@ export default {
 
 <style scoped>
 .navigation {
-  position: absolute;
-  z-index: 25;
+  position: fixed;
+  z-index: 100;
   width: 25%;
   height: 100vh;
   background-color: var(--blue);
@@ -99,13 +99,14 @@ button.hamburger {
   position: fixed;
   top: 2.2rem;
   left: 2.2rem;
-  z-index: 20;
-  padding: 0;
+  z-index: 999;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   width: 1.8rem;
   height: auto;
+  pointer-events: auto;
 }
 
 .hamburger-line {
@@ -188,9 +189,10 @@ button.hamburger {
 @media (max-width: 480px) {
   button.hamburger {
     top: 0.75rem;
-    left: 0.75rem;
+    left: 1.1rem;
     width: 1.2rem;
     gap: 0.3rem;
+    padding: 0.4rem;
   }
 
   .hamburger-line {
