@@ -1,4 +1,4 @@
-import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import './timing.js';globalThis.__timing__.logStart('Nitro Start');import { tmpdir } from 'node:os';
+import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
 import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, getRequestURL, getResponseHeader, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, createError, getRouterParam, readBody, getQuery as getQuery$1, getResponseStatusText } from 'file:///root/app/code/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
@@ -12,7 +12,7 @@ import { createHead as createHead$1, propsToString, renderSSRHead } from 'file:/
 import { isVNode, toValue, isRef } from 'file:///root/app/code/node_modules/vue/index.mjs';
 import { walkResolver } from 'file:///root/app/code/node_modules/unhead/dist/utils.mjs';
 import { renderToString } from 'file:///root/app/code/node_modules/vue/server-renderer/index.mjs';
-import { createDebugger, createHooks } from 'file:///root/app/code/node_modules/hookable/dist/index.mjs';
+import { createHooks } from 'file:///root/app/code/node_modules/hookable/dist/index.mjs';
 import { createFetch, Headers as Headers$1 } from 'file:///root/app/code/node_modules/ofetch/dist/node.mjs';
 import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///root/app/code/node_modules/node-mock-http/dist/index.mjs';
 import { createStorage, prefixStorage } from 'file:///root/app/code/node_modules/unstorage/dist/index.mjs';
@@ -1086,46 +1086,8 @@ function onConsoleLog(callback) {
   consola$1.wrapConsole();
 }
 
-function defineNitroPlugin(def) {
-  return def;
-}
-
-const _V8nAQpA4AZgo4iEGLcWfiihrCzHk_b6VJHPowFjiwE = defineNitroPlugin((nitro) => {
-  createDebugger(nitro.hooks, { tag: "nitro-runtime" });
-});
-
-const globalTiming = globalThis.__timing__ || {
-  start: () => 0,
-  end: () => 0,
-  metrics: []
-};
-const timingMiddleware = eventHandler((event) => {
-  const start = globalTiming.start();
-  const _end = event.node.res.end;
-  event.node.res.end = function(chunk, encoding, cb) {
-    const metrics = [
-      ["Generate", globalTiming.end(start)],
-      ...globalTiming.metrics
-    ];
-    const serverTiming = metrics.map((m) => `-;dur=${m[1]};desc="${encodeURIComponent(m[0])}"`).join(", ");
-    if (!event.node.res.headersSent) {
-      event.node.res.setHeader("Server-Timing", serverTiming);
-    }
-    _end.call(event.node.res, chunk, encoding, cb);
-    return this;
-  }.bind(event.node.res);
-});
-const _VuiTFEu1NdKz4IzlUI0904ic5GYXz9YBLLnLOD9wR_c = defineNitroPlugin((nitro) => {
-  nitro.h3App.stack.unshift({
-    route: "/",
-    handler: timingMiddleware
-  });
-});
-
 const plugins = [
-  _DQ0b3atfF_DkY5ixq7rhPjzX1gg5OVJwocSpysXkew,
-_V8nAQpA4AZgo4iEGLcWfiihrCzHk_b6VJHPowFjiwE,
-_VuiTFEu1NdKz4IzlUI0904ic5GYXz9YBLLnLOD9wR_c
+  _DQ0b3atfF_DkY5ixq7rhPjzX1gg5OVJwocSpysXkew
 ];
 
 const _lazy_9cOaGr = () => Promise.resolve().then(function () { return portfolio_get$1; });
@@ -1981,5 +1943,5 @@ const template = "";
 const _virtual__spaTemplate = /*#__PURE__*/Object.freeze({
   __proto__: null,
   template: template
-});;globalThis.__timing__.logEnd('Nitro Start');
+});
 //# sourceMappingURL=index.mjs.map
