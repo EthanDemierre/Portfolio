@@ -235,10 +235,12 @@ export default {
 
 @media (max-width: 480px) {
   .flower-icon {
-    width: 3.5rem;
-    height: 3.5rem;
-    left: 0.75rem;
-    top: -0.5rem;
+    position: fixed;
+    width: 3rem;
+    height: 3rem;
+    top: 0.75rem;
+    left: 1.1rem;
+    z-index: 30;
   }
 }
 
