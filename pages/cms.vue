@@ -2,7 +2,10 @@
   <div class="cms-page">
     <header class="cms-header">
       <h1 class="cms-title">Gestion des Projets</h1>
-      <button @click="goHome" class="back-btn">← Retour</button>
+      <div class="header-actions">
+        <button @click="logout" class="logout-btn">Déconnexion</button>
+        <button @click="goHome" class="back-btn">← Retour</button>
+      </div>
     </header>
 
     <main class="cms-main">
@@ -69,6 +72,7 @@
 
 <script>
 export default {
+  middleware: 'cms-auth',
   async setup() {
     const { data: fetchedProjects } = await useFetch('/api/projects');
     return { fetchedProjects };
@@ -138,6 +142,10 @@ export default {
     },
     goHome() {
       this.$router.push('/');
+    },
+    logout() {
+      localStorage.removeItem('cmsAuth');
+      this.$router.push('/cms-login');
     }
   }
 };
@@ -163,6 +171,13 @@ export default {
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--blue);
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .cms-title {
@@ -172,7 +187,8 @@ export default {
   font-weight: 600;
 }
 
-.back-btn {
+.back-btn,
+.logout-btn {
   background: none;
   border: 2px solid var(--blue);
   color: var(--blue);
@@ -185,7 +201,8 @@ export default {
   white-space: nowrap;
 }
 
-.back-btn:hover {
+.back-btn:hover,
+.logout-btn:hover {
   background-color: var(--blue);
   color: white;
 }
