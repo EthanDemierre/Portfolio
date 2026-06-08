@@ -139,8 +139,8 @@ const sendMessage = () => {
 @media (max-width: 480px) {
   .grid-item-main {
     grid-column: 1 / -1;
-    grid-row: 2 / span 10;
-    padding: 1rem;
+    grid-row: 2 / span 9;
+    padding: 0.75rem;
   }
 }
 
@@ -154,19 +154,28 @@ const sendMessage = () => {
 
 @media (max-width: 768px) {
   .contact-form {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    gap: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
   .contact-form {
-    padding: 1rem;
+    padding: 0.75rem;
+    gap: 0.75rem;
   }
 }
 
 .form-row {
   display: flex;
   gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }
 
 @media (max-width: 768px) {

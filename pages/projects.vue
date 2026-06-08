@@ -3,10 +3,10 @@
 
   <main class="grid-container">
 
-    <div class="projects-scroll-container" @mouseenter="pauseScroll" @mouseleave="resumeScroll">
+    <div class="projects-scroll-container">
       <div class="projects-list" :style="{ transform: getLoopedTransform() }">
-        <div v-for="(project, index) in projects" :key="index" class="project-item" @mouseenter="hoveredIndex = index" @mouseleave="hoveredIndex = -1">
-          <div class="project-image-wrapper">
+        <div v-for="(project, index) in projects" :key="index" class="project-item">
+          <div class="project-image-wrapper" @mouseenter="pauseScrollAndHover(index)" @mouseleave="resumeScrollAndUnhover">
             <img :src="project.image" :alt="project.title" class="project-image" :class="{ blurred: hoveredIndex === index }" />
             <div v-if="hoveredIndex === index" class="project-info">
               <div class="project-info-content">
@@ -37,11 +37,13 @@ export default {
     };
   },
   methods: {
-    pauseScroll() {
+    pauseScrollAndHover(index) {
       this.isScrolling = false;
+      this.hoveredIndex = index;
     },
-    resumeScroll() {
+    resumeScrollAndUnhover() {
       this.isScrolling = true;
+      this.hoveredIndex = -1;
     },
     animateScroll() {
       if (this.isScrolling) {
@@ -126,15 +128,15 @@ export default {
 
 @media (max-width: 768px) {
   .projects-list {
-    gap: 1.5rem;
-    padding: 0.75rem;
+    gap: 1rem;
+    padding: 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .projects-list {
-    gap: 1rem;
-    padding: 0.5rem;
+    gap: 0.75rem;
+    padding: 0.25rem;
   }
 }
 
@@ -143,39 +145,34 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 600px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.project-item:hover {
-  transform: scale(1.02);
 }
 
 @media (max-width: 1024px) {
   .project-item {
-    min-height: 450px;
+    min-height: 400px;
   }
 }
 
 @media (max-width: 768px) {
   .project-item {
-    min-height: 350px;
+    min-height: 280px;
   }
 }
 
 @media (max-width: 480px) {
   .project-item {
-    min-height: 250px;
+    min-height: 180px;
   }
 }
 
 .project-image-wrapper {
   position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
 }
 
 .project-image {
@@ -183,7 +180,12 @@ export default {
   max-height: 100%;
   object-fit: contain;
   border: 1px solid var(--black);
-  transition: filter 0.3s ease;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.project-image:hover {
+  transform: scale(1.02);
 }
 
 .project-image.blurred {
@@ -245,26 +247,7 @@ export default {
 
 @media (max-width: 768px) {
   .project-info-content {
-    padding: 1.5rem;
-  }
-
-  .project-date {
-    font-size: 0.8rem;
-  }
-
-  .project-description {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-
-  .project-medium {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .project-info-content {
-    padding: 1rem;
+    padding: 1.25rem;
   }
 
   .project-date {
@@ -272,12 +255,31 @@ export default {
   }
 
   .project-description {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     margin-bottom: 0.75rem;
   }
 
   .project-medium {
     font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-info-content {
+    padding: 0.75rem;
+  }
+
+  .project-date {
+    font-size: 0.65rem;
+  }
+
+  .project-description {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-medium {
+    font-size: 0.65rem;
   }
 }
 </style>
