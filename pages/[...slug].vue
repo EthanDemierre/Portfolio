@@ -77,6 +77,9 @@
 
 <script>
 export default {
+  definePageMeta: {
+    layout: false
+  },
   data() {
     return {
       canvas: null,
@@ -103,10 +106,15 @@ export default {
   },
   methods: {
     initGame() {
-      this.canvas = document.getElementById('gameCanvas');
-      this.ctx = this.canvas.getContext('2d');
-      this.loadScores();
-      this.loadPlayerName();
+      this.$nextTick(() => {
+        this.canvas = document.getElementById('gameCanvas');
+        if (this.canvas) {
+          this.ctx = this.canvas.getContext('2d');
+          this.loadScores();
+          this.loadPlayerName();
+          this.draw();
+        }
+      });
     },
     startGame() {
       if (this.gameRunning) return;
@@ -275,9 +283,17 @@ export default {
   },
   mounted() {
     this.initGame();
+    this.canvas = document.getElementById('gameCanvas');
+    if (this.canvas) {
+      this.canvas.addEventListener('keydown', this.handleKeyPress);
+      this.canvas.focus();
+    }
     window.addEventListener('keydown', this.handleKeyPress);
   },
   beforeUnmount() {
+    if (this.canvas) {
+      this.canvas.removeEventListener('keydown', this.handleKeyPress);
+    }
     window.removeEventListener('keydown', this.handleKeyPress);
   }
 };
