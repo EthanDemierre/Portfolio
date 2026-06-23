@@ -1,32 +1,10 @@
 <template>
   <page-nav />
 
-  <iframe
-    class="cables-iframe"
-    allow="autoplay;"
-    src="https://cables.gl/view/tduqhJ"
-  ></iframe>
+
 
   <main class="page-main">
-    <section class="hero-content">
-      <div class="hero-text">
-        <div class="name-section">
-          <img src="/img/fleur.svg" alt="fleur" class="flower-icon">
-          <h1>Ethan Demierre</h1>
-        </div>
-        <div class="role-box">
-          <h4>Interactive Media Designer.</h4>
-        </div>
-      </div>
-    </section>
 
-    <section class="quote-section">
-      <p><b>factotum</b> \fak.tɔ.tɔm\</p>
-      <p>
-        Emprunté au latin de la Renaissance <b>factotum</b> («fais tout»),
-        du latin facere («faire») et <b>totum</b> («tout»).
-      </p>
-    </section>
   </main>
 </template>
 
